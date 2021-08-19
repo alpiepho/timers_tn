@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const kVersion = '0.2';
+const kVersion = '0.1';
 
 const kInputPageBackgroundColor = Colors.black45;
 
@@ -34,6 +34,12 @@ const kOrangeColor = Color(0xFFFF985A);
 const kDarkColor = Color(0xFFF29292C);
 const kLightColor = Color(0xFF333333);
 const kYellowColor = Colors.yellow;
+
+const kLabelHeaderTextStyle = TextStyle(
+  fontSize: 30.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+);
 
 const kLabelTextStyle = TextStyle(
   fontSize: 24.0,

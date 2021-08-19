@@ -37,9 +37,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
     Navigator.of(context).pop();
   }
 
-
-
-
   void _notifyEngine(int x, int y) async {
     if(this._engine.processKey(x, y)) {
       // only some keys should cause page to re-build
@@ -56,7 +53,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
   @override
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    //print("calc build");
     if (!isPortrait) {
       return Scaffold(
         backgroundColor: kInputPageBackgroundColor,
@@ -91,10 +87,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
     colWidgets.add(Container(
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           new Text(
-            "Timers", 
-            style: kLabelTextStyle
+            "Multiple Timers TN", 
+            style: kLabelHeaderTextStyle
           ),
         ],
       ),
