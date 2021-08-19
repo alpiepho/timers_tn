@@ -3,7 +3,6 @@ import 'package:timers_tn/constants.dart';
 
 class Cell {
   String label;
-  TextStyle style;
   bool halfHeight;
   Color background;
   bool gradient;
@@ -13,7 +12,6 @@ class Cell {
 
   Cell({
     this.label = '',
-    this.style = kNumberTextStyle,
     this.halfHeight = false,
     this.background = Colors.grey,
     this.gradient = true,
@@ -23,13 +21,35 @@ class Cell {
   });
 }
 
+// class Timer():
+//     delta = DELTA
+//     start = 0
+//     current = 0
+//     formatted = "0:00.0"
+//     running = False
+//     paused = False
+//     color = GREEN
+//     color_dim = GREEN_DIM
+//     current_yellow = 0
+//     current_orange = 0
+//     current_red = 0
+//     blink = BLINK_BLINK
+//     blink_on = False
+//     blink_last = 0
+//     sound = False
+//     pressed_last = 0
+
 class Timer {
   String label;
-  Color color;
+  int start;
+  bool down;
+  int current;
 
   Timer({
     this.label = '',
-    this.color = Colors.green, // green, yellow, orange, red
+    this.start = 0,
+    this.down = false,
+    this.current = 0,
   });
 }
 
@@ -77,81 +97,81 @@ class Engine {
   Engine() {
     int row = 0;
     int col = 0;
-    grid[row][col] = new Cell(label: "PauseAll", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "PauseAll");
     pauseAllX = row;
     pauseAllY = col;
     col++;
-    grid[row][col] = new Cell(label: "", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "");
     col++;
-    grid[row][col] = new Cell(label: "?", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "?");
     settingsX = row;
     settingsY = col;
     col++;
     row++;
     col = 0;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer1X = row;
     timer1Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer2X = row;
     timer2Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer3X = row;
     timer3Y = col;
     col++;
     row++;
     col = 0;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer4X = row;
     timer4Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer5X = row;
     timer5Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer6X = row;
     timer6Y = col;
     col++;
     row++;
     col = 0;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer7X = row;
     timer7Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer8X = row;
     timer8Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer9X = row;
     timer9Y = col;
     col++;
     row++;
     col = 0;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer10X = row;
     timer10Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer11X = row;
     timer11Y = col;
     col++;
-    grid[row][col] = new Cell(label: "00:00.00", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "00:00.00");
     timer12X = row;
     timer12Y = col;
     col++;
     row++;
     col = 0;
-    grid[row][col] = new Cell(label: "ResetN", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "ResetN");
     resetNX = row;
     restNY = col;
     col++;
-    grid[row][col] = new Cell(label: "", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "");
     col++;
-    grid[row][col] = new Cell(label: "ResetAll", style: kLabelTextStyle);
+    grid[row][col] = new Cell(label: "ResetAll");
     resetAllX = row;
     resetAllY = col;
     col++;
@@ -180,28 +200,6 @@ class Engine {
     adjustTimers();
   }
 
-  // void setActive(String key) {
-  //   for (int x = 0; x < grid.length; x++) {
-  //     for (int y = 0; y < grid[0].length; y++) {
-  //       if (key == grid[x][y].label) {
-  //         grid[x][y].active = true;
-  //       }
-  //     }
-  //   }
-  //   //lastOp = "";
-  // }
-
-  // void clearActive(String key) {
-  //   for (int x = 0; x < grid.length; x++) {
-  //     for (int y = 0; y < grid[0].length; y++) {
-  //       if (key == grid[x][y].label) {
-  //         grid[x][y].active = false;
-  //       }
-  //     }
-  //   }
-  //   //lastOp = "";
-  // }
-
   //
   // Public methods
   //
@@ -212,14 +210,6 @@ class Engine {
 
   String setLabel(int x, int y, String label) {
     return grid[x][y].label = label;
-  }
-
-  TextStyle getStyle(int x, int y) {
-    var style = grid[x][y].style;
-    if (grid[x][y].active) {
-      style = grid[x][y].style.copyWith(color: Colors.yellow);
-    }
-    return style;
   }
 
   void adjustTimers() {

@@ -20,18 +20,10 @@ const kLanscapeWarningTextStyle = TextStyle(
   height: 1.2,
 );
 
-const kResultTextStyle = TextStyle(
-  fontSize: 40,
-  color: Colors.white,
-  fontWeight: FontWeight.bold,
-  height: 1.2,
-);
-
 const kBlueColor = Color(0xFF637D9E);
 const kRedColor = Color(0xFFC30000);
 const kGreenColor = Color(0xFF00B02B);
 const kOrangeColor = Color(0xFFFF985A);
-const kDarkColor = Color(0xFFF29292C);
 const kLightColor = Color(0xFF333333);
 const kYellowColor = Colors.yellow;
 
@@ -44,24 +36,6 @@ const kLabelHeaderTextStyle = TextStyle(
 const kLabelTextStyle = TextStyle(
   fontSize: 24.0,
   color: Colors.white,
-  fontWeight: FontWeight.bold,
-);
-
-const kActiveLabelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: kYellowColor,
-  fontWeight: FontWeight.bold,
-);
-
-const kBlueLabelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: kBlueColor,
-  fontWeight: FontWeight.bold,
-);
-
-const kDarkLabelTextStyle = TextStyle(
-  fontSize: 18.0,
-  color: kDarkColor,
   fontWeight: FontWeight.bold,
 );
 

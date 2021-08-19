@@ -26,17 +26,22 @@ TBD
 - [done] stip down settings page
 - [done] settings for number of timers
 - [done] show timers based on number (engine and page)
+- [done] cleanup unused constants
+- [done] rename calc classes and files
+- [done] fix navaigation to settings page
+- [done] engine prefs for number timers
+- [done] save pref for numberof timers
 
-- rename calc classes and files
-- engine prefs for number timers
-- fix navaigation to settings page
-- save pref for numberof timers
+- test number colors
+- test fast number update
+- move style out of engine?
 - save pref for up/down of each timer
 - save pref for start time of each timer
 - dont save current value
 
 - modify engine for timer features
-- cleanup unused constants
 - FINISH
 
+
+## Known Issues to Fix
 - fix settings if timer goes from first bar to next

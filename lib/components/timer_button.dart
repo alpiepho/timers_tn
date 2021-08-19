@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 //import 'package:timers_tn/constants.dart';
 
-class CalcButton extends StatelessWidget {
-  CalcButton({
+class TimerButton extends StatelessWidget {
+  TimerButton({
     required this.color, 
     required this.margin, 
     required this.portrait,

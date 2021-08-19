@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:timers_tn/components/calc_button.dart';
+import 'package:timers_tn/components/timer_button.dart';
 import 'package:timers_tn/components/settings_modal.dart';
 import 'package:timers_tn/constants.dart';
 import 'package:timers_tn/engine.dart';
@@ -32,7 +32,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   void _onDone() async {
-    this._engine.adjustTimers();  // HACK: force update
+    this._engine.adjustTimers();  // force update
     _fromEngine();
     Navigator.of(context).pop();
   }
@@ -104,7 +104,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       var rowWidgets = <Widget>[];
       for (var j = 0; j < this._engine.grid[0].length; j++) {
         var label = this._engine.getLabel(i, j);
-        var style = this._engine.getStyle(i, j);
+        var style = kLabelTextStyle;
         var disabled = this._engine.grid[i][j].disabled;
         if (disabled) {
           style = style.copyWith(color: kLightColor);
@@ -135,7 +135,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         if (flex > 0) {
           rowWidgets.add(
             new Expanded(
-              child: CalcButton(
+              child: TimerButton(
                 onPress: onPress,
                 color: background,
                 margin: EdgeInsets.fromLTRB(0, 0, 2, 2),
