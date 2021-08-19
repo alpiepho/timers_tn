@@ -21,13 +21,21 @@ TBD
 - [done] start project from flutter create
 - [done] modify engine to show "buttons" for each timer
 - [done] pass thru button clicks to engine
+- [done] clean up engine and stub out
+- [done] settings for number of timers
+- [done] stip down settings page
+- [done] settings for number of timers
 
-- clean up engine and stub out
+- show timers based on number (engine and page)
 - rename calc classes and files
-- stip down settings page
-- settings for number of timers
 - engine prefs for number timers
 - fix navaigation to settings page
+- save pref for numberof timers
+- save pref for up/down of each timer
+- save pref for start time of each timer
+- dont save current value
 
 - modify engine for timer features
 - FINISH
+
+- fix settings if timer goes from first bar to next

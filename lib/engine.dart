@@ -33,11 +33,11 @@ class Cell {
 // const FUNCS_ASIN = 5;
 
 class Engine {
-  var lastOp = "";
-  var inputLimit = 20;
+  // var lastOp = "";
+  // var inputLimit = 20;
 
-  var stack = List.generate(4, (index) => "0");
-  var memory = "";
+  // var stack = List.generate(4, (index) => "0");
+  // var memory = "";
 
   var grid = List.generate(6, (i) => List.generate(3, (index) => Cell()),
       growable: false);
@@ -108,27 +108,27 @@ class Engine {
   // int orX = -1;
   // int orY = -1;
 
-  var mode = "DEC";
-  var numberBits = 32; // 8, 12, 16, 24, 32, 48,   not supported in pwa: 64
-  var numberSigned = false;
-  var keyClick = false;
-  var sounds = false;
-  var backspaceCE = true;
-  var dozonal = false; // base12
-  var operatorPrec = true; // 1+2x3=7 instead of 9
+  // var mode = "DEC";
+  // var numberBits = 32; // 8, 12, 16, 24, 32, 48,   not supported in pwa: 64
+  // var numberSigned = false;
+  // var keyClick = false;
+  // var sounds = false;
+  // var backspaceCE = true;
+  // var dozonal = false; // base12
+  // var operatorPrec = true; // 1+2x3=7 instead of 9
 
-  var resultLines = 1;
-  var rpn = false;
-  var floatingPoint = false;
-  var decimalPoints = 4;
-  var functionsIndex = 0;
+  var numberTimers = 12;
+  // var rpn = false;
+  // var floatingPoint = false;
+  // var decimalPoints = 4;
+  // var functionsIndex = 0;
 
-  var editing = false;
+  // var editing = false;
 
   Engine() {
-    for (int i = 0; i < stack.length; i++) {
-      stack[i] = "0";
-    }
+    // for (int i = 0; i < stack.length; i++) {
+    //   stack[i] = "0";
+    // }
     int row = 0;
     int col = 0;
     // NOTE: if you change a key string, look for other references (cleaner than creating 50 const)
@@ -416,24 +416,24 @@ class Engine {
   //
   String pack() {
     String result = "VER "+kVersion+";"; // match with unpack()
-    for (var value in stack) {
-      result += value + ";";
-    }
-    result += memory + ";";
-    result += mode + ";";
-    result += numberBits.toString() + ";";
-    result += numberSigned.toString() + ";";
-    result += keyClick.toString() + ";";
-    result += sounds.toString() + ";";
-    result += backspaceCE.toString() + ";";
-    result += dozonal.toString() + ";";
-    result += operatorPrec.toString() + ";";
+    // for (var value in stack) {
+    //   result += value + ";";
+    // }
+    // result += memory + ";";
+    // result += mode + ";";
+    // result += numberBits.toString() + ";";
+    // result += numberSigned.toString() + ";";
+    // result += keyClick.toString() + ";";
+    // result += sounds.toString() + ";";
+    // result += backspaceCE.toString() + ";";
+    // result += dozonal.toString() + ";";
+    // result += operatorPrec.toString() + ";";
 
-    result += resultLines.toString() + ";";
-    result += rpn.toString() + ";";
-    result += floatingPoint.toString() + ";";
-    result += decimalPoints.toString() + ";";
-    result += functionsIndex.toString() + ";";
+    result += numberTimers.toString() + ";";
+    // result += rpn.toString() + ";";
+    // result += floatingPoint.toString() + ";";
+    // result += decimalPoints.toString() + ";";
+    // result += functionsIndex.toString() + ";";
     return result;
   }
 
@@ -835,7 +835,7 @@ class Engine {
         }
       }
     }
-    lastOp = "";
+    //lastOp = "";
   }
 
   void clearActive(String key) {
@@ -846,7 +846,7 @@ class Engine {
         }
       }
     }
-    lastOp = "";
+    //lastOp = "";
   }
 
   // void pushStack(String value) {
