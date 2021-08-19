@@ -25,6 +25,15 @@ class Cell {
   });
 }
 
+class Timer {
+  String label;
+  Color color;
+
+  Timer({
+    this.label = '',
+    this.color = Colors.green, // green, yellow, orange, red
+  });
+}
 // const FUNCS_SHL = 0;
 // const FUNCS_1X = 1;
 // const FUNCS_SIN = 2;
@@ -117,13 +126,14 @@ class Engine {
   // var dozonal = false; // base12
   // var operatorPrec = true; // 1+2x3=7 instead of 9
 
-  var numberTimers = 12;
+  var numberTimers = 1;
   // var rpn = false;
   // var floatingPoint = false;
   // var decimalPoints = 4;
   // var functionsIndex = 0;
 
   // var editing = false;
+
 
   Engine() {
     // for (int i = 0; i < stack.length; i++) {
@@ -339,6 +349,7 @@ class Engine {
     resetAllY = col;
     col++;
     row++;
+    adjustTimers();
     // grid[row][col] = new Cell(label: "A", disabled: true);
     // col++;
     // grid[row][col] = new Cell(label: "B", disabled: true);
@@ -464,6 +475,7 @@ class Engine {
     // functionsIndex = int.parse(parts[index++]);
 
     // applyMode("HEX"); // HACK: force update
+    adjustTimers();
   }
 
 //   bool isModeKey(String key) {
@@ -1419,60 +1431,132 @@ class Engine {
     return style;
   }
 
+  void adjustTimers() {
+    this.grid[timer1X][timer1Y].disabled = true;
+    this.grid[timer2X][timer2Y].disabled = true;
+    this.grid[timer3X][timer3Y].disabled = true;
+    this.grid[timer4X][timer4Y].disabled = true;
+    this.grid[timer5X][timer5Y].disabled = true;
+    this.grid[timer6X][timer6Y].disabled = true;
+    this.grid[timer7X][timer7Y].disabled = true;
+    this.grid[timer8X][timer8Y].disabled = true;
+    this.grid[timer9X][timer9Y].disabled = true;
+    this.grid[timer10X][timer10Y].disabled = true;
+    this.grid[timer11X][timer11Y].disabled = true;
+    this.grid[timer12X][timer12Y].disabled = true;
+
+    int index = 0;
+    if (index < this.numberTimers) {
+      this.grid[timer1X][timer1Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer2X][timer2Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer3X][timer3Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer4X][timer4Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer5X][timer5Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer6X][timer6Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer7X][timer7Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer8X][timer8Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer9X][timer9Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer10X][timer10Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer11X][timer11Y].disabled = false;
+      index += 1;
+    }
+    if (index < this.numberTimers) {
+      this.grid[timer12X][timer12Y].disabled = false;
+      index += 1;
+    }
+  }
+
   bool processKey(int x, int y) {
     var result = false;
     if (grid[x][y].disabled) return result;
 
-  if (x == pauseAllX && y == pauseAllY) {
-    print("pauseAll");
-  }
-  if (x == settingsX && y == settingsY) {
-    print("settings");
-  }
- 
-  if (x == timer1X && y == timer1Y) {
-    print("timer1");
-  }
-  if (x == timer2X && y == timer2Y) {
-    print("timer2");
-  }
-  if (x == timer3X && y == timer3Y) {
-    print("timer3");
-  }
-  if (x == timer4X && y == timer4Y) {
-    print("timer4");
-  }
-  if (x == timer5X && y == timer5Y) {
-    print("timer5");
-  }
-  if (x == timer6X && y == timer6Y) {
-    print("timer6");
-  }
-  if (x == timer7X && y == timer7Y) {
-    print("timer7");
-  }
-  if (x == timer8X && y == timer8Y) {
-    print("timer8");
-  }
-  if (x == timer9X && y == timer9Y) {
-    print("timer9");
-  }
-  if (x == timer10X && y == timer10Y) {
-    print("timer10");
-  }
-  if (x == timer11X && y == timer11Y) {
-    print("timer11");
-  }
-  if (x == timer12X && y == timer12Y) {
-    print("timer12");
-  }
+    if (x == pauseAllX && y == pauseAllY) {
+      print("pauseAll");
+    }
+    if (x == settingsX && y == settingsY) {
+      print("settings");
+    }
+  
+    if (x == timer1X && y == timer1Y) {
+      print("timer1");
+    }
+    if (x == timer2X && y == timer2Y) {
+      print("timer2");
+    }
+    if (x == timer3X && y == timer3Y) {
+      print("timer3");
+    }
+    if (x == timer4X && y == timer4Y) {
+      print("timer4");
+    }
+    if (x == timer5X && y == timer5Y) {
+      print("timer5");
+    }
+    if (x == timer6X && y == timer6Y) {
+      print("timer6");
+    }
+    if (x == timer7X && y == timer7Y) {
+      print("timer7");
+    }
+    if (x == timer8X && y == timer8Y) {
+      print("timer8");
+    }
+    if (x == timer9X && y == timer9Y) {
+      print("timer9");
+    }
+    if (x == timer10X && y == timer10Y) {
+      print("timer10");
+    }
+    if (x == timer11X && y == timer11Y) {
+      print("timer11");
+    }
+    if (x == timer12X && y == timer12Y) {
+      print("timer12");
+    }
 
-  if (x == resetNX && y == restNY) {
-    print("resetN");
-  }
-  if (x == resetAllX && y == resetAllY) {
-    print("resetAll");
-  }
+    if (x == resetNX && y == restNY) {
+      print("resetN");
+    }
+    if (x == resetAllX && y == resetAllY) {
+      print("resetAll");
+    }
+
+    // if (numberTimers_last != numberTimers) {
+    //   numberTimers_last = numberTimers;
+    //   adjustTimers();
+    //   result  = true;
+    // }
+
     return result;
   }
 }

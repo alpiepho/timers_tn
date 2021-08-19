@@ -32,7 +32,7 @@ const kRedColor = Color(0xFFC30000);
 const kGreenColor = Color(0xFF00B02B);
 const kOrangeColor = Color(0xFFFF985A);
 const kDarkColor = Color(0xFFF29292C);
-const kLightColor = Color(0xFFACACAC);
+const kLightColor = Color(0xFF333333);
 const kYellowColor = Colors.yellow;
 
 const kLabelTextStyle = TextStyle(

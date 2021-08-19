@@ -32,7 +32,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   void _onDone() async {
-    //this._engine.applyMode("HEX");  // HACK: force update
+    this._engine.adjustTimers();  // HACK: force update
     _fromEngine();
     Navigator.of(context).pop();
   }

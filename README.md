@@ -25,8 +25,8 @@ TBD
 - [done] settings for number of timers
 - [done] stip down settings page
 - [done] settings for number of timers
+- [done] show timers based on number (engine and page)
 
-- show timers based on number (engine and page)
 - rename calc classes and files
 - engine prefs for number timers
 - fix navaigation to settings page
@@ -36,6 +36,7 @@ TBD
 - dont save current value
 
 - modify engine for timer features
+- cleanup unused constants
 - FINISH
 
 - fix settings if timer goes from first bar to next
