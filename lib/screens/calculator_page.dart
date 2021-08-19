@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:timers_tn/components/calc_button.dart';
-import 'package:timers_tn/components/results_area.dart';
 import 'package:timers_tn/components/settings_modal.dart';
 import 'package:timers_tn/constants.dart';
 import 'package:timers_tn/engine.dart';
@@ -13,7 +12,6 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
 
   Engine _engine = Engine();
-  late ResultsArea _resultsArea;
 
   void _loadEngine() async {
     final prefs = await SharedPreferences.getInstance();
@@ -34,9 +32,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   void _onDone() async {
-    this._engine.applyMode("HEX");  // HACK: force update
+    //this._engine.applyMode("HEX");  // HACK: force update
     _fromEngine();
-    this._resultsArea.fromEngine();
     Navigator.of(context).pop();
   }
 
@@ -48,8 +45,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
       // only some keys should cause page to re-build
       _fromEngine();
     }
-    // trigger results area to rebuild
-    this._resultsArea.fromEngine();
   }
 
   @override
@@ -61,7 +56,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   @override
   Widget build(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    print("calc build");
+    //print("calc build");
     if (!isPortrait) {
       return Scaffold(
         backgroundColor: kInputPageBackgroundColor,
@@ -92,8 +87,20 @@ class _CalculatorPageState extends State<CalculatorPage> {
       mainColumnHeightPortrait = kMainColumnHeightPortrait2;
     }
 
-    _resultsArea = ResultsArea(this._engine);
-    colWidgets.add(_resultsArea);
+    colWidgets.add(new SizedBox(height: 10));
+
+    colWidgets.add(Container(
+      child: Row(
+        children: [
+          new Text(
+            "Timers", 
+            style: kLabelTextStyle
+          ),
+        ],
+      ),
+    ));
+
+    colWidgets.add(new SizedBox(height: 10));
 
     // build the buttons
     for (var i = 0; i < this._engine.grid.length; i++) {

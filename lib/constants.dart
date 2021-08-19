@@ -36,7 +36,7 @@ const kLightColor = Color(0xFFACACAC);
 const kYellowColor = Colors.yellow;
 
 const kLabelTextStyle = TextStyle(
-  fontSize: 18.0,
+  fontSize: 24.0,
   color: Colors.white,
   fontWeight: FontWeight.bold,
 );

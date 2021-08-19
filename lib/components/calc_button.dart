@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 // import 'package:hexcalc_tn/constants.dart';
 
-Color darken(Color color, [double amount = .1]) {
-  assert(amount >= 0 && amount <= 1);
+// Color darken(Color color, [double amount = .1]) {
+//   assert(amount >= 0 && amount <= 1);
 
-  final hsl = HSLColor.fromColor(color);
-  final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
+//   final hsl = HSLColor.fromColor(color);
+//   final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
 
-  return hslDark.toColor();
-}
+//   return hslDark.toColor();
+// }
 
-Color lighten(Color color, [double amount = .1]) {
-  assert(amount >= 0 && amount <= 1);
+// Color lighten(Color color, [double amount = .1]) {
+//   assert(amount >= 0 && amount <= 1);
 
-  final hsl = HSLColor.fromColor(color);
-  final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+//   final hsl = HSLColor.fromColor(color);
+//   final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
 
-  return hslLight.toColor();
-}
+//   return hslLight.toColor();
+// }
 class CalcButton extends StatelessWidget {
   CalcButton({
     required this.color, 
@@ -38,8 +38,8 @@ class CalcButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var colorTop = color;
-    var colorBottom = (gradient ? darken(color, 0.2) : color);
+    // var colorTop = color;
+    // var colorBottom = (gradient ? darken(color, 0.2) : color);
     return InkWell(
         onTap: onPress as void Function()?,
         splashColor: (disabled ? Colors.transparent : Colors.white),
@@ -47,23 +47,22 @@ class CalcButton extends StatelessWidget {
           child: cardChild,
           margin: margin,
           width: double.infinity,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(10),
-              topLeft: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10),
-            ),
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                colorTop,
-                colorBottom,
-              ],
-            )
-
-          ),
+          // decoration: BoxDecoration(
+          //   borderRadius: BorderRadius.only(
+          //     topRight: Radius.circular(10),
+          //     topLeft: Radius.circular(10),
+          //     bottomLeft: Radius.circular(10),
+          //     bottomRight: Radius.circular(10),
+          //   ),
+          //   gradient: LinearGradient(
+          //     begin: Alignment.topCenter,
+          //     end: Alignment.bottomCenter,
+          //     colors: [
+          //       colorTop,
+          //       colorBottom,
+          //     ],
+          //   )
+          // ),
         ),
       );
   }

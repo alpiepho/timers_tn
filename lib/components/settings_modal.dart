@@ -223,7 +223,7 @@ class _SettingsModal extends State<SettingsModal> {
           else {
             this.engine.functionsIndex = 0;
           }
-          this.engine.clearStack();
+          //this.engine.clearStack();
         }
       }
     );

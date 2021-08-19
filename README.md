@@ -19,8 +19,15 @@ TBD
 
 - BASIC IMPLEMENTATION
 - [done] start project from flutter create
+- [done] modify engine to show "buttons" for each timer
+- [done] pass thru button clicks to engine
 
-- compare to hexcalc_tn and leverage config files, engine, and calc page
-- modify engine to show "buttons" for each timer
+- clean up engine and stub out
+- rename calc classes and files
+- stip down settings page
+- settings for number of timers
+- engine prefs for number timers
+- fix navaigation to settings page
+
 - modify engine for timer features
 - FINISH
