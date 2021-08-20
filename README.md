@@ -31,14 +31,17 @@ TBD
 - [done] fix navaigation to settings page
 - [done] engine prefs for number timers
 - [done] save pref for numberof timers
+- [done] move style out of engine?
+- [done] test number colors
+- [done] test fast number update
 
-- test number colors
-- test fast number update
-- move style out of engine?
+- test 12 timers
+- refactor timer logic with state in engine
+
 - save pref for up/down of each timer
 - save pref for start time of each timer
 - dont save current value
-- static layout timers for performance?
+- declarative layout timers for performance?
 
 - modify engine for timer features
 - FINISH

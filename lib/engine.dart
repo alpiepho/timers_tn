@@ -1,6 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:timers_tn/constants.dart';
 
+enum KeyType {
+  pauseAll,
+  settings,
+  timer1,
+  timer2,
+  timer3,
+  timer4,
+  timer5,
+  timer6,
+  timer7,
+  timer8,
+  timer9,
+  timer10,
+  timer11,
+  timer12,
+  resetN,
+  resetAll,
+  none
+}
 class Cell {
   String label;
   bool halfHeight;
@@ -212,6 +231,7 @@ class Engine {
     return grid[x][y].label = label;
   }
 
+ 
   void adjustTimers() {
     this.grid[timer1X][timer1Y].disabled = true;
     this.grid[timer2X][timer2Y].disabled = true;
@@ -334,4 +354,61 @@ class Engine {
 
     return result;
   }
+
+
+  KeyType getKeyType(int x, int y) {
+    KeyType t = KeyType.none;
+    if (x == pauseAllX && y == pauseAllY) {
+      t = KeyType.pauseAll;
+    }
+    if (x == settingsX && y == settingsY) {
+      t = KeyType.settings;
+    }
+  
+    if (x == timer1X && y == timer1Y) {
+      t = KeyType.timer1;
+    }
+    if (x == timer2X && y == timer2Y) {
+      t = KeyType.timer2;
+    }
+    if (x == timer3X && y == timer3Y) {
+      t = KeyType.timer3;
+    }
+    if (x == timer4X && y == timer4Y) {
+      t = KeyType.timer4;
+    }
+    if (x == timer5X && y == timer5Y) {
+      t = KeyType.timer5;
+    }
+    if (x == timer6X && y == timer6Y) {
+      t = KeyType.timer6;
+    }
+    if (x == timer7X && y == timer7Y) {
+      t = KeyType.timer7;
+    }
+    if (x == timer8X && y == timer8Y) {
+      t = KeyType.timer8;
+    }
+    if (x == timer9X && y == timer9Y) {
+      t = KeyType.timer9;
+    }
+    if (x == timer10X && y == timer10Y) {
+      t = KeyType.timer10;
+    }
+    if (x == timer11X && y == timer11Y) {
+      t = KeyType.timer11;
+    }
+    if (x == timer12X && y == timer12Y) {
+      t = KeyType.timer12;
+    }
+
+    if (x == resetNX && y == restNY) {
+      t = KeyType.resetN;
+    }
+    if (x == resetAllX && y == resetAllY) {
+      t = KeyType.resetAll;
+    }
+    return t;
+  }
+
 }

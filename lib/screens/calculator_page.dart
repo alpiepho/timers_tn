@@ -15,10 +15,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   Engine _engine = Engine();
 
-  Timer _timer1 = Timer(Duration(seconds: 10), () => {});
-  bool _isRunning = true;
   String _label1 = "00:00.00";
+  Timer _timer1 = Timer(Duration(seconds: 10), () => {});
+  bool _timerUp1 = false;
+  int _timerStartMs1 = 10000;
   Duration _timerDuration1 = Duration(milliseconds: 0);
+  TextStyle _timerStyle1 = kLabelTextStyle;
 
   void _loadEngine() async {
     final prefs = await SharedPreferences.getInstance();
@@ -45,14 +47,40 @@ class _CalculatorPageState extends State<CalculatorPage> {
   }
 
   void _handleTick10ms() {
+    bool changed = false;
+    TextStyle newStyle = kLabelTextStyle;
+    if (_timerUp1) {
       _timerDuration1 += Duration(milliseconds: 10);
+      changed = true;
+    }
+    if (!_timerUp1 && _timerDuration1.inMilliseconds >= 10) {
+      _timerDuration1 -= Duration(milliseconds: 10);
+      changed = true;
+
+      if (_timerDuration1.inMilliseconds > 8000 && _timerDuration1.inMilliseconds <= 10000) {
+        newStyle = newStyle.copyWith(color: kGreenColor);
+      }
+      if (_timerDuration1.inMilliseconds > 5000 && _timerDuration1.inMilliseconds <= 8000) {
+        newStyle = newStyle.copyWith(color: kYellowColor);
+      }
+      if (_timerDuration1.inMilliseconds > 2000 && _timerDuration1.inMilliseconds <= 5000) {
+        newStyle = newStyle.copyWith(color: kOrangeColor);
+      }
+      if (_timerDuration1.inMilliseconds <= 2000) {
+        newStyle = newStyle.copyWith(color: kRedColor);
+      }
+    }
+    if (changed) {
       var m = _timerDuration1.inMinutes.remainder(60).toString().padLeft(2, '0');
       var s = _timerDuration1.inSeconds.remainder(60).toString().padLeft(2, '0');
       var hs = (_timerDuration1.inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
 
       setState(() {
         _label1 = "$m:$s.$hs";
+        _timerStyle1 = newStyle;
       });
+
+    }
   }
 
   void _notifyEngine(int x, int y) async {
@@ -60,23 +88,31 @@ class _CalculatorPageState extends State<CalculatorPage> {
       // only some keys should cause page to re-build
       _fromEngine();
     }
-    // setState(() {
-    //   _isRunning = false;
-    // });
-    if (_timer1.isActive) {
-      _timer1.cancel();
-      setState(() {
-        _label1 = "00:00.00";
-      });
-    }
-    else {
-      _timer1 = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
-        // if (!_isRunning) {
-        //   timer.cancel();
-        // }
-        _handleTick10ms();
-      });
 
+    switch (this._engine.getKeyType(x, y)) {
+      case KeyType.pauseAll:
+        if (_timer1.isActive) {
+          _timer1.cancel();
+          if (_timerUp1) {
+            _timerDuration1 = Duration(milliseconds: 0);
+          } else {
+            _timerDuration1 = Duration(milliseconds: _timerStartMs1);
+          }
+          var m = _timerDuration1.inMinutes.remainder(60).toString().padLeft(2, '0');
+          var s = _timerDuration1.inSeconds.remainder(60).toString().padLeft(2, '0');
+          var hs = (_timerDuration1.inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
+          setState(() {
+            _label1 = "$m:$s.$hs";
+            _timerStyle1 = kLabelTextStyle;
+          });
+        }
+        else {
+          _timer1 = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+            _handleTick10ms();
+          });
+        }
+        break;
+      default: break;
     }
   }
 
@@ -147,10 +183,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
       var rowWidgets = <Widget>[];
       for (var j = 0; j < this._engine.grid[0].length; j++) {
         var label = this._engine.getLabel(i, j);
-        switch (count) {
-          case 3: label = _label1; break;
-        }
         var style = kLabelTextStyle;
+        switch (count) {
+          case 3: label = _label1; style = _timerStyle1; break;
+        }
         var disabled = this._engine.grid[i][j].disabled;
         if (disabled) {
           style = style.copyWith(color: kLightColor);
