@@ -22,6 +22,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
   Duration _timerDuration1 = Duration(milliseconds: 0);
   TextStyle _timerStyle1 = kLabelTextStyle;
 
+  bool _resetNPending = false;
+  TextStyle _resetNStyle = kLabelTextStyle;
+
   void _loadEngine() async {
     final prefs = await SharedPreferences.getInstance();
     var packed = prefs.getString('engine') ?? "";
@@ -91,7 +94,46 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
     switch (this._engine.getKeyType(x, y)) {
       case KeyType.pauseAll:
+        print(_timer1.isActive);
         if (_timer1.isActive) {
+          _timer1.cancel();
+        }
+        else {
+          _timer1 = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+            _handleTick10ms();
+          });
+        }
+        break;
+
+      case KeyType.resetAll:
+        _timer1.cancel();
+        if (_timerUp1) {
+          _timerDuration1 = Duration(milliseconds: 0);
+        } else {
+          _timerDuration1 = Duration(milliseconds: _timerStartMs1);
+        }
+        var m = _timerDuration1.inMinutes.remainder(60).toString().padLeft(2, '0');
+        var s = _timerDuration1.inSeconds.remainder(60).toString().padLeft(2, '0');
+        var hs = (_timerDuration1.inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
+        setState(() {
+          _label1 = "$m:$s.$hs";
+          _timerStyle1 = kLabelTextStyle;
+        });
+        break;
+
+      case KeyType.resetN:
+        _resetNPending = true;
+        setState(() {
+          _resetNStyle = kLabelTextStyle.copyWith(color: kYellowColor);
+        });
+        break;
+
+      case KeyType.timer1:
+        if (_resetNPending) {
+          _resetNPending = false;
+          setState(() {
+            _resetNStyle = kLabelTextStyle;
+          });
           _timer1.cancel();
           if (_timerUp1) {
             _timerDuration1 = Duration(milliseconds: 0);
@@ -107,9 +149,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
           });
         }
         else {
-          _timer1 = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
-            _handleTick10ms();
-          });
+          if (_timer1.isActive) {
+            _timer1.cancel();
+          }
+          else {
+            _timer1 = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+              _handleTick10ms();
+            });
+          }
         }
         break;
       default: break;
@@ -120,12 +167,21 @@ class _CalculatorPageState extends State<CalculatorPage> {
   initState() {
     super.initState();
     _loadEngine();
-    // Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
-    //   if (!_isRunning) {
-    //     timer.cancel();
-    //   }
-    //   _handleTick10ms();
-    // });
+    if (_timer1.isActive) {
+      _timer1.cancel();
+      if (_timerUp1) {
+        _timerDuration1 = Duration(milliseconds: 0);
+      } else {
+        _timerDuration1 = Duration(milliseconds: _timerStartMs1);
+      }
+      var m = _timerDuration1.inMinutes.remainder(60).toString().padLeft(2, '0');
+      var s = _timerDuration1.inSeconds.remainder(60).toString().padLeft(2, '0');
+      var hs = (_timerDuration1.inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
+      setState(() {
+        _label1 = "$m:$s.$hs";
+        _timerStyle1 = kLabelTextStyle;
+      });
+    }
   }
 
   @override
@@ -186,6 +242,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         var style = kLabelTextStyle;
         switch (count) {
           case 3: label = _label1; style = _timerStyle1; break;
+          case 15: style = _resetNStyle; break;
         }
         var disabled = this._engine.grid[i][j].disabled;
         if (disabled) {
