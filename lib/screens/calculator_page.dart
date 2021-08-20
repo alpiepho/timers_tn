@@ -4,6 +4,8 @@ import 'package:timers_tn/components/settings_modal.dart';
 import 'package:timers_tn/constants.dart';
 import 'package:timers_tn/engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:async';
+
 class CalculatorPage extends StatefulWidget {
   @override
   _CalculatorPageState createState() => _CalculatorPageState();
@@ -12,6 +14,11 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
 
   Engine _engine = Engine();
+
+  Timer _timer1 = Timer(Duration(seconds: 10), () => {});
+  bool _isRunning = true;
+  String _label1 = "00:00.00";
+  Duration _timerDuration1 = Duration(milliseconds: 0);
 
   void _loadEngine() async {
     final prefs = await SharedPreferences.getInstance();
@@ -37,10 +44,39 @@ class _CalculatorPageState extends State<CalculatorPage> {
     Navigator.of(context).pop();
   }
 
+  void _handleTick10ms() {
+      _timerDuration1 += Duration(milliseconds: 10);
+      var m = _timerDuration1.inMinutes.remainder(60).toString().padLeft(2, '0');
+      var s = _timerDuration1.inSeconds.remainder(60).toString().padLeft(2, '0');
+      var hs = (_timerDuration1.inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
+
+      setState(() {
+        _label1 = "$m:$s.$hs";
+      });
+  }
+
   void _notifyEngine(int x, int y) async {
     if(this._engine.processKey(x, y)) {
       // only some keys should cause page to re-build
       _fromEngine();
+    }
+    // setState(() {
+    //   _isRunning = false;
+    // });
+    if (_timer1.isActive) {
+      _timer1.cancel();
+      setState(() {
+        _label1 = "00:00.00";
+      });
+    }
+    else {
+      _timer1 = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+        // if (!_isRunning) {
+        //   timer.cancel();
+        // }
+        _handleTick10ms();
+      });
+
     }
   }
 
@@ -48,6 +84,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
   initState() {
     super.initState();
     _loadEngine();
+    // Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+    //   if (!_isRunning) {
+    //     timer.cancel();
+    //   }
+    //   _handleTick10ms();
+    // });
   }
 
   @override
@@ -100,10 +142,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
     colWidgets.add(new SizedBox(height: 10));
 
     // build the buttons
+    int count = 0;
     for (var i = 0; i < this._engine.grid.length; i++) {
       var rowWidgets = <Widget>[];
       for (var j = 0; j < this._engine.grid[0].length; j++) {
         var label = this._engine.getLabel(i, j);
+        switch (count) {
+          case 3: label = _label1; break;
+        }
         var style = kLabelTextStyle;
         var disabled = this._engine.grid[i][j].disabled;
         if (disabled) {
@@ -156,6 +202,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
             ),
           );
         }
+        count += 1;
       }
       var row = new Row(children: rowWidgets);
       var container = new Container(

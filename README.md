@@ -38,6 +38,7 @@ TBD
 - save pref for up/down of each timer
 - save pref for start time of each timer
 - dont save current value
+- static layout timers for performance?
 
 - modify engine for timer features
 - FINISH

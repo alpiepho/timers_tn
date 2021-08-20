@@ -39,13 +39,13 @@ class Cell {
 //     sound = False
 //     pressed_last = 0
 
-class Timer {
+class TimerStruct {
   String label;
   int start;
   bool down;
   int current;
 
-  Timer({
+  TimerStruct({
     this.label = '',
     this.start = 0,
     this.down = false,
