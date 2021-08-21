@@ -34,8 +34,9 @@ TBD
 - [done] move style out of engine?
 - [done] test number colors
 - [done] test fast number update
+- [done] test 12 timers
 
-- test 12 timers
+- refactor for 12 timers slow and out of sync
 - refactor timer logic with state in engine
 
 - save pref for up/down of each timer

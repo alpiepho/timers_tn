@@ -58,19 +58,19 @@ class Cell {
 //     sound = False
 //     pressed_last = 0
 
-class TimerStruct {
-  String label;
-  int start;
-  bool down;
-  int current;
+// class TimerStruct {
+//   String label;
+//   int start;
+//   bool down;
+//   int current;
 
-  TimerStruct({
-    this.label = '',
-    this.start = 0,
-    this.down = false,
-    this.current = 0,
-  });
-}
+//   TimerStruct({
+//     this.label = '',
+//     this.start = 0,
+//     this.down = false,
+//     this.current = 0,
+//   });
+// }
 
 class Engine {
   var grid = List.generate(6, (i) => List.generate(3, (index) => Cell()),
@@ -409,6 +409,47 @@ class Engine {
       t = KeyType.resetAll;
     }
     return t;
+  }
+
+  int getTimerNumber(int x, int y) {
+    var result = 0;
+    if (x == timer1X && y == timer1Y) {
+      result = 1;
+    }
+    if (x == timer2X && y == timer2Y) {
+      result = 2;
+    }
+    if (x == timer3X && y == timer3Y) {
+      result = 3;
+    }
+    if (x == timer4X && y == timer4Y) {
+      result = 4;
+    }
+    if (x == timer5X && y == timer5Y) {
+      result = 5;
+    }
+    if (x == timer6X && y == timer6Y) {
+      result = 6;
+    }
+    if (x == timer7X && y == timer7Y) {
+      result = 7;
+    }
+    if (x == timer8X && y == timer8Y) {
+      result = 8;
+    }
+    if (x == timer9X && y == timer9Y) {
+      result = 9;
+    }
+    if (x == timer10X && y == timer10Y) {
+      result = 10;
+    }
+    if (x == timer11X && y == timer11Y) {
+      result = 11;
+    }
+    if (x == timer12X && y == timer12Y) {
+      result = 12;
+    }
+    return result;
   }
 
 }
