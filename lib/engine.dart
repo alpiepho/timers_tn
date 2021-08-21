@@ -3,6 +3,7 @@ import 'package:timers_tn/constants.dart';
 
 enum KeyType {
   pauseAll,
+  playAll,
   settings,
   timer1,
   timer2,
@@ -77,6 +78,8 @@ class Engine {
       growable: false);
   int pauseAllX = -1;
   int pauseAllY = -1;
+  int playAllX = -1;
+  int playAllY = -1;
   int settingsX = -1;
   int settingsY = -1;
  
@@ -120,7 +123,9 @@ class Engine {
     pauseAllX = row;
     pauseAllY = col;
     col++;
-    grid[row][col] = new Cell(label: "");
+    grid[row][col] = new Cell(label: "PlayAll");
+    playAllX = row;
+    playAllY = col;
     col++;
     grid[row][col] = new Cell(label: "?");
     settingsX = row;
@@ -304,7 +309,10 @@ class Engine {
     if (x == pauseAllX && y == pauseAllY) {
       print("pauseAll");
     }
-    if (x == settingsX && y == settingsY) {
+     if (x == playAllX && y == playAllY) {
+      print("playAll");
+    }
+   if (x == settingsX && y == settingsY) {
       print("settings");
     }
   
@@ -360,6 +368,9 @@ class Engine {
     KeyType t = KeyType.none;
     if (x == pauseAllX && y == pauseAllY) {
       t = KeyType.pauseAll;
+    }
+    if (x == playAllX && y == playAllY) {
+      t = KeyType.playAll;
     }
     if (x == settingsX && y == settingsY) {
       t = KeyType.settings;

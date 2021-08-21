@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:timers_tn/components/timer_button.dart';
 import 'package:timers_tn/components/settings_modal.dart';
@@ -7,11 +9,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
 class TimerSettings {
+  bool disabled;
   bool up;
   int startMs;
   bool sound;
 
   TimerSettings({
+    this.disabled = true,
     this.up = false,
     this.startMs = 10000,
     this.sound = false,
@@ -29,18 +33,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
   bool _resetNPending = false;
   TextStyle _resetNStyle = kLabelTextStyle;
 
-  var timerSettings = new List.generate(12, (index) => TimerSettings());
+  var timerSettings = new List.generate(12, (index) => TimerSettings());  // TODO move to engine
   var durations = new List.generate(12, (index) => Duration(milliseconds: 0));
   var timers = new List.generate(12, (index) => Timer(Duration(seconds: 10), () => {}));
   
-
-  // Timer1 settings and timer object
-  // bool _timerUp1 = false;
-  // int _timerStartMs1 = 10000;
-  // Duration _timerDuration1 = Duration(milliseconds: 0);
-  // bool _timerSound1 = false;
-  // Timer _timer1 = Timer(Duration(seconds: 10), () => {});
-
   // state variables, not sure if these can be in a List
   String _timerLabel1 = "00:00.00";
   TextStyle _timerStyle1 = kLabelTextStyle;
@@ -67,11 +63,67 @@ class _CalculatorPageState extends State<CalculatorPage> {
   String _timerLabel12 = "00:00.00";
   TextStyle _timerStyle12 = kLabelTextStyle;
 
+  void _timerState(int number, String newLabel, TextStyle newStyle) {
+    setState(() {
+      switch (number) {
+        case 1: 
+            _timerLabel1 = newLabel;
+            _timerStyle1 = newStyle;
+          break;
+        case 2: 
+            _timerLabel2 = newLabel;
+            _timerStyle2 = newStyle;
+          break;
+        case 3: 
+            _timerLabel3 = newLabel;
+            _timerStyle3 = newStyle;
+          break;
+        case 4: 
+            _timerLabel4 = newLabel;
+            _timerStyle4 = newStyle;
+          break;
+        case 5: 
+            _timerLabel5 = newLabel;
+            _timerStyle5 = newStyle;
+          break;
+        case 6: 
+            _timerLabel6 = newLabel;
+            _timerStyle6 = newStyle;
+          break;
+        case 7: 
+            _timerLabel7 = newLabel;
+            _timerStyle7 = newStyle;
+          break;
+        case 8: 
+            _timerLabel8 = newLabel;
+            _timerStyle8 = newStyle;
+          break;
+        case 9: 
+            _timerLabel9 = newLabel;
+            _timerStyle9 = newStyle;
+          break;
+        case 10: 
+            _timerLabel10 = newLabel;
+            _timerStyle10 = newStyle;
+          break;
+        case 11: 
+            _timerLabel11 = newLabel;
+            _timerStyle11 = newStyle;
+          break;
+        case 12: 
+            _timerLabel12 = newLabel;
+            _timerStyle12 = newStyle;
+          break;
+      }
+    });    
+  }
 
   void _timerReset(int number) {
     int index = number - 1;
+
+    TextStyle newStyle = kLabelTextStyle;
     timers[index].cancel();
-    if (timerSettings[index].up) {
+    if (timerSettings[index].disabled || timerSettings[index].up) {
       durations[index] = Duration(milliseconds: 0);
     } else {
       durations[index] = Duration(milliseconds: timerSettings[index].startMs);
@@ -79,63 +131,16 @@ class _CalculatorPageState extends State<CalculatorPage> {
     var m = durations[index].inMinutes.remainder(60).toString().padLeft(2, '0');
     var s = durations[index].inSeconds.remainder(60).toString().padLeft(2, '0');
     var hs = (durations[index].inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
-
-    setState(() {
-      switch (number) {
-        case 1: 
-            _timerLabel1 = "$m:$s.$hs";
-            _timerStyle1 = kLabelTextStyle;
-          break;
-        case 2: 
-            _timerLabel2 = "$m:$s.$hs";
-            _timerStyle2 = kLabelTextStyle;
-          break;
-        case 3: 
-            _timerLabel3 = "$m:$s.$hs";
-            _timerStyle3 = kLabelTextStyle;
-          break;
-        case 4: 
-            _timerLabel4 = "$m:$s.$hs";
-            _timerStyle4 = kLabelTextStyle;
-          break;
-        case 5: 
-            _timerLabel5 = "$m:$s.$hs";
-            _timerStyle5 = kLabelTextStyle;
-          break;
-        case 6: 
-            _timerLabel6 = "$m:$s.$hs";
-            _timerStyle6 = kLabelTextStyle;
-          break;
-        case 7: 
-            _timerLabel7 = "$m:$s.$hs";
-            _timerStyle7 = kLabelTextStyle;
-          break;
-        case 8: 
-            _timerLabel8 = "$m:$s.$hs";
-            _timerStyle8 = kLabelTextStyle;
-          break;
-        case 9: 
-            _timerLabel9 = "$m:$s.$hs";
-            _timerStyle9 = kLabelTextStyle;
-          break;
-        case 10: 
-            _timerLabel10 = "$m:$s.$hs";
-            _timerStyle10 = kLabelTextStyle;
-          break;
-        case 11: 
-            _timerLabel11 = "$m:$s.$hs";
-            _timerStyle11 = kLabelTextStyle;
-          break;
-        case 12: 
-            _timerLabel12 = "$m:$s.$hs";
-            _timerStyle12 = kLabelTextStyle;
-          break;
-      }
-    });
-}
+    var newLabel = "$m:$s.$hs";
+    _timerState(number, newLabel, newStyle);
+  }
 
   void _timerTick10ms(int number) {
     int index = number - 1;
+    if (timerSettings[index].disabled) {
+      return;
+    }
+
     bool changed = false;
     TextStyle newStyle = kLabelTextStyle;
     if (timerSettings[index].up) {
@@ -163,63 +168,28 @@ class _CalculatorPageState extends State<CalculatorPage> {
       var m = durations[index].inMinutes.remainder(60).toString().padLeft(2, '0');
       var s = durations[index].inSeconds.remainder(60).toString().padLeft(2, '0');
       var hs = (durations[index].inMilliseconds.remainder(1000) ~/10).toString().padLeft(2, '0');
+      var newLabel = "$m:$s.$hs";
+      _timerState(number, newLabel, newStyle);
+    }
+  }
 
-      setState(() {
-        switch (number) {
-          case 1: 
-              _timerLabel1 = "$m:$s.$hs";
-              _timerStyle1 = newStyle;
-            break;
-          case 2: 
-              _timerLabel2 = "$m:$s.$hs";
-              _timerStyle2 = newStyle;
-            break;
-          case 3: 
-              _timerLabel3 = "$m:$s.$hs";
-              _timerStyle3 = newStyle;
-            break;
-          case 4: 
-              _timerLabel4 = "$m:$s.$hs";
-              _timerStyle4 = newStyle;
-            break;
-          case 5: 
-              _timerLabel5 = "$m:$s.$hs";
-              _timerStyle5 = newStyle;
-            break;
-          case 6: 
-              _timerLabel6 = "$m:$s.$hs";
-              _timerStyle6 = newStyle;
-            break;
-          case 7: 
-              _timerLabel7 = "$m:$s.$hs";
-              _timerStyle7 = newStyle;
-            break;
-          case 8: 
-              _timerLabel8 = "$m:$s.$hs";
-              _timerStyle8 = newStyle;
-            break;
-          case 9: 
-              _timerLabel9 = "$m:$s.$hs";
-              _timerStyle9 = newStyle;
-            break;
-          case 10: 
-              _timerLabel10 = "$m:$s.$hs";
-              _timerStyle10 = newStyle;
-            break;
-          case 11: 
-              _timerLabel11 = "$m:$s.$hs";
-              _timerStyle11 = newStyle;
-            break;
-          case 12: 
-              _timerLabel12 = "$m:$s.$hs";
-              _timerStyle12 = newStyle;
-            break;
-        }
+  void _timerPause(int number) {
+    int index = number - 1;
+    if (timers[index].isActive) {
+      timers[index].cancel();
+    }
+  }
+
+  void _timerPlay(int number,) {
+    int index = number - 1;
+    if (!timers[index].isActive) {
+      timers[index] = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
+        _timerTick10ms(number);
       });
     }
   }
 
-  void _timerToggle(int number, bool force) {
+  void _timerToggle(int number) {
     int index = number - 1;
     if (timers[index].isActive) {
       timers[index].cancel();
@@ -265,7 +235,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
     switch (this._engine.getKeyType(x, y)) {
       case KeyType.pauseAll:
         for (int i = 1; i <= 12; i++) {
-          _timerToggle(i, true);
+          _timerPause(i);
+        }
+        break;
+      case KeyType.playAll:
+        for (int i = 1; i <= 12; i++) {
+          _timerPlay(i);
         }
         break;
 
@@ -303,7 +278,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
           _timerReset(number);
         }
         else {
-          _timerToggle(number, false);
+          _timerToggle(number);
         }
         break;
       default: break;
@@ -352,7 +327,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       mainColumnHeightPortrait = kMainColumnHeightPortrait2;
     }
 
-    colWidgets.add(new SizedBox(height: 10));
+    colWidgets.add(new SizedBox(height: 40));
 
     colWidgets.add(Container(
       child: Row(
@@ -366,7 +341,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       ),
     ));
 
-    colWidgets.add(new SizedBox(height: 10));
+    colWidgets.add(new SizedBox(height: 40));
 
     // build the buttons
     int count = 0;
@@ -394,6 +369,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
         if (disabled) {
           style = style.copyWith(color: kLightColor);
         }
+
+        // TODO better way?
+        if (_engine.getTimerNumber(i, j) > 0) {
+          timerSettings[_engine.getTimerNumber(i, j)-1].disabled = disabled;
+        }
+
         var background = this._engine.grid[i][j].background;
         var gradient = this._engine.grid[i][j].gradient;
         var flex = this._engine.grid[i][j].flex;
