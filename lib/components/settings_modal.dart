@@ -27,8 +27,6 @@ class _SettingsModal extends State<SettingsModal> {
     this.engine = engine;
     this.onDone = onDone;
 
-    this._rowsIndex1 = 0;
-    this._rowsIndex2 = 0;
     this._useTimerIndex1 = 0;
     this._useTimerIndex2 = 0;
     this._useTimerIndex3 = 0;
@@ -41,6 +39,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._useTimerIndex10 = 0;
     this._useTimerIndex11 = 0;
     this._useTimerIndex12 = 0;
+    this._useTimerIndexAll = 0;
   }
 
   late BuildContext context;
@@ -50,8 +49,6 @@ class _SettingsModal extends State<SettingsModal> {
   late var selectedRate;
   late List<String> allRates;
 
-  late int _rowsIndex1;
-  late int _rowsIndex2;
   late int _useTimerIndex1;
   late int _useTimerIndex2;
   late int _useTimerIndex3;
@@ -64,18 +61,7 @@ class _SettingsModal extends State<SettingsModal> {
   late int _useTimerIndex10;
   late int _useTimerIndex11;
   late int _useTimerIndex12;
-
-  void numberTimersToggle1(int index) {
-    this._rowsIndex1 = 0;
-    this._rowsIndex2 = 0;
-    this.engine.numberTimers = index;
-  }
-
-  void numberTimersToggle2(int index) {
-    this._rowsIndex1 = 0;
-    this._rowsIndex2 = 0;
-    this.engine.numberTimers = 6 + index;
-  }
+  late int _useTimerIndexAll;
 
   void useTimerToggle(int number, int index) {
     this.engine.useTimer[number-1] = ((index == 1) ? true : false);
@@ -95,6 +81,23 @@ class _SettingsModal extends State<SettingsModal> {
         case 12: this._useTimerIndex12 = index; break;
       }     
     });
+  }
+
+  void useTimerToggleAll(int index) {
+    this.engine.useTimerAll = ((index == 1) ? true : false);
+    this._useTimerIndexAll = index;
+    useTimerToggle(1, index);
+    useTimerToggle(2, index);
+    useTimerToggle(3, index);
+    useTimerToggle(4, index);
+    useTimerToggle(5, index);
+    useTimerToggle(6, index);
+    useTimerToggle(7, index);
+    useTimerToggle(8, index);
+    useTimerToggle(9, index);
+    useTimerToggle(10, index);
+    useTimerToggle(11, index);
+    useTimerToggle(12, index);
   }
 
   void onHelp() async {
@@ -126,14 +129,6 @@ class _SettingsModal extends State<SettingsModal> {
       );
     }
 
-    if (this.engine.numberTimers >= 0 && this.engine.numberTimers <= 6) {
-      this._rowsIndex1 = this.engine.numberTimers + 1 - 1;
-      this._rowsIndex2 = 0;
-    }
-    if (this.engine.numberTimers >= 7 && this.engine.numberTimers <= 12) {
-      this._rowsIndex1 = 0;
-      this._rowsIndex2 = this.engine.numberTimers + 1 - 6 - 1;
-    }
     this._useTimerIndex1 = (this.engine.useTimer[0] ? 1 : 0);
     this._useTimerIndex2 = (this.engine.useTimer[1] ? 1 : 0);
     this._useTimerIndex3 = (this.engine.useTimer[2] ? 1 : 0);
@@ -146,6 +141,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._useTimerIndex10 = (this.engine.useTimer[9] ? 1 : 0);
     this._useTimerIndex11 = (this.engine.useTimer[10] ? 1 : 0);
     this._useTimerIndex12 = (this.engine.useTimer[11] ? 1 : 0);
+    this._useTimerIndexAll = (this.engine.useTimerAll ? 1 : 0);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -168,7 +164,7 @@ class _SettingsModal extends State<SettingsModal> {
           children: <Widget>[
             new SizedBox(height: kSettingsSizedBoxHeight),
             new Text(
-              "    Number of Timers",
+              "    Enable Timers",
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 16,
@@ -191,7 +187,7 @@ class _SettingsModal extends State<SettingsModal> {
             //   onToggle: numberTimersToggle2,
             // ),
 
-            new SizedBox(height: kSettingsSizedBoxHeight),
+            //new SizedBox(height: kSettingsSizedBoxHeight),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex1,
@@ -264,6 +260,12 @@ class _SettingsModal extends State<SettingsModal> {
               index: this._useTimerIndex12,
               label: "    Enable Timer 12",
               onToggle: (index) { useTimerToggle(12, index); },
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._useTimerIndexAll,
+              label: "    Enable All Timers",
+              onToggle: useTimerToggleAll,
             ),
 
 

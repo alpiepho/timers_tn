@@ -115,6 +115,7 @@ class Engine {
 
   var numberTimers = 1;
   var useTimer = List.generate(12, (index) => false);
+  var useTimerAll = false;
 
 
   Engine() {
@@ -204,6 +205,7 @@ class Engine {
     for (int i = 0; i < useTimer.length; i++) {
       useTimer[i] = false;
     }
+    useTimerAll = false;
     adjustTimers();
   }
 
