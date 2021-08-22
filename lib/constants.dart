@@ -13,6 +13,13 @@ const kSettingsModalBackgroundColor = Colors.black12;
 
 const kSettingsSizedBoxHeight = 20.0;
 
+const kSettingsTextEditStyle = TextStyle(
+  fontSize: 20.0,
+  color: Colors.blue,
+  fontWeight: FontWeight.normal,
+);
+
+
 const kLanscapeWarningTextStyle = TextStyle(
   fontSize: 30,
   color: Colors.white,

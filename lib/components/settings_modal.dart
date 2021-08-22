@@ -159,8 +159,8 @@ class _SettingsModal extends State<SettingsModal> {
       ),
       body: Container(
         width: kMainContainerWidthPortrait,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        child: ListView(
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             new SizedBox(height: kSettingsSizedBoxHeight),
             new Text(
@@ -168,97 +168,84 @@ class _SettingsModal extends State<SettingsModal> {
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 16,
-                //fontWeight: FontWeight.w700,
+                fontWeight: FontWeight.w700,
               ),
             ),
 
-            new SizedBox(height: 10),
-            // ToggleRow(
-            //   minWidth: 50.0,
-            //   index: this._rowsIndex1,
-            //   labels: [' ', '1', '2', '3', '4', '5', '6'],
-            //   onToggle: numberTimersToggle1,
-            // ),
             // new SizedBox(height: 10),
-            // ToggleRow(
-            //   minWidth: 50.0,
-            //   index: this._rowsIndex2,
-            //   labels: [' ', '7', '8', '9', '10', '11', '12'],
-            //   onToggle: numberTimersToggle2,
-            // ),
 
             //new SizedBox(height: kSettingsSizedBoxHeight),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex1,
-              label: "    Enable Timer 1",
+              label: "    Timer 1",
               onToggle: (index) { useTimerToggle(1, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex2,
-              label: "    Enable Timer 2",
+              label: "    Timer 2",
               onToggle: (index) { useTimerToggle(2, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex3,
-              label: "    Enable Timer 3",
+              label: "    Timer 3",
               onToggle: (index) { useTimerToggle(3, index); },
             ),
 
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex4,
-              label: "    Enable Timer 4",
+              label: "    Timer 4",
               onToggle: (index) { useTimerToggle(4, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex5,
-              label: "    Enable Timer 5",
+              label: "    Timer 5",
               onToggle: (index) { useTimerToggle(5, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex6,
-              label: "    Enable Timer 6",
+              label: "    Timer 6",
               onToggle: (index) { useTimerToggle(6, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex7,
-              label: "    Enable Timer 7",
+              label: "    Timer 7",
               onToggle: (index) { useTimerToggle(7, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex8,
-              label: "    Enable Timer 8",
+              label: "    Timer 8",
               onToggle: (index) { useTimerToggle(8, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex9,
-              label: "    Enable Timer 9",
+              label: "    Timer 9",
               onToggle: (index) { useTimerToggle(9, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex10,
-              label: "    Enable Timer 10",
+              label: "    Timer 10",
               onToggle: (index) { useTimerToggle(10, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex11,
-              label: "    Enable Timer 11",
+              label: "    Timer 11",
               onToggle: (index) { useTimerToggle(11, index); },
             ),
             new SizedBox(height: 10),
             ToggleChoice(
               index: this._useTimerIndex12,
-              label: "    Enable Timer 12",
+              label: "    Timer 12",
               onToggle: (index) { useTimerToggle(12, index); },
             ),
             new SizedBox(height: 10),
@@ -267,6 +254,76 @@ class _SettingsModal extends State<SettingsModal> {
               label: "    Enable All Timers",
               onToggle: useTimerToggleAll,
             ),
+
+
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 1",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._useTimerIndex1,
+              label: "    count down",
+              onToggle: (index) {},
+            ),
+            //new SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'minutes:seconds',
+                  ),
+                  autofocus: false,
+                  initialValue: "10:00",
+                  onChanged: (text) => {},
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._useTimerIndex1,
+              label: "    sound",
+              onToggle: (index) {},
+            ),
+
+
+
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 2",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
+
+
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 3",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+
 
 
             Divider(
@@ -297,7 +354,7 @@ class _SettingsModal extends State<SettingsModal> {
               "Press timer itself to pause/play only that timer.",
               textAlign: TextAlign.center,
             ),
-       
+
             Divider(
               height: 20.0,
               thickness: 2.0,
@@ -317,6 +374,9 @@ class _SettingsModal extends State<SettingsModal> {
               ),
               onTap: onHelp,
             ),
+            new SizedBox(height: kSettingsSizedBoxHeight),
+            new SizedBox(height: kSettingsSizedBoxHeight),
+            new SizedBox(height: kSettingsSizedBoxHeight),
             new SizedBox(height: kSettingsSizedBoxHeight),
           ],
         ),
