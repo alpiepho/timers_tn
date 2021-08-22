@@ -23,7 +23,8 @@ class TimerButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: onPress as void Function()?,
-        splashColor: (disabled ? Colors.transparent : Colors.white),
+        //enableFeedback: false,
+        //splashColor: (disabled ? Colors.transparent : Colors.white),
         child: Container(
           child: cardChild,
           margin: margin,

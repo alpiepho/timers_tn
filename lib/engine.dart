@@ -114,6 +114,7 @@ class Engine {
   int resetAllY = -1;
 
   var numberTimers = 1;
+  var useTimer = List.generate(12, (index) => false);
 
 
   Engine() {
@@ -200,6 +201,9 @@ class Engine {
     resetAllY = col;
     col++;
     row++;
+    for (int i = 0; i < useTimer.length; i++) {
+      useTimer[i] = false;
+    }
     adjustTimers();
   }
 
@@ -209,6 +213,9 @@ class Engine {
   String pack() {
     String result = "VER "+kVersion+";"; // match with unpack()
     result += numberTimers.toString() + ";";
+    for (var value in useTimer) {
+      result += value.toString() + ";";
+    }
     return result;
   }
 
@@ -220,6 +227,9 @@ class Engine {
     if (parts[index++] != ("VER "+kVersion)) return; // match with pack()
 
     numberTimers = int.parse(parts[index++]);
+    for (int i = 0; i < useTimer.length; i++) {
+      useTimer[i] = parts[index++] == "true";
+    }
 
     adjustTimers();
   }
@@ -238,68 +248,18 @@ class Engine {
 
  
   void adjustTimers() {
-    this.grid[timer1X][timer1Y].disabled = true;
-    this.grid[timer2X][timer2Y].disabled = true;
-    this.grid[timer3X][timer3Y].disabled = true;
-    this.grid[timer4X][timer4Y].disabled = true;
-    this.grid[timer5X][timer5Y].disabled = true;
-    this.grid[timer6X][timer6Y].disabled = true;
-    this.grid[timer7X][timer7Y].disabled = true;
-    this.grid[timer8X][timer8Y].disabled = true;
-    this.grid[timer9X][timer9Y].disabled = true;
-    this.grid[timer10X][timer10Y].disabled = true;
-    this.grid[timer11X][timer11Y].disabled = true;
-    this.grid[timer12X][timer12Y].disabled = true;
-
-    int index = 0;
-    if (index < this.numberTimers) {
-      this.grid[timer1X][timer1Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer2X][timer2Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer3X][timer3Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer4X][timer4Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer5X][timer5Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer6X][timer6Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer7X][timer7Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer8X][timer8Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer9X][timer9Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer10X][timer10Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer11X][timer11Y].disabled = false;
-      index += 1;
-    }
-    if (index < this.numberTimers) {
-      this.grid[timer12X][timer12Y].disabled = false;
-      index += 1;
-    }
+    this.grid[timer1X][timer1Y].disabled = !this.useTimer[0];
+    this.grid[timer2X][timer2Y].disabled = !this.useTimer[1];
+    this.grid[timer3X][timer3Y].disabled = !this.useTimer[2];
+    this.grid[timer4X][timer4Y].disabled = !this.useTimer[3];
+    this.grid[timer5X][timer5Y].disabled = !this.useTimer[4];
+    this.grid[timer6X][timer6Y].disabled = !this.useTimer[5];
+    this.grid[timer7X][timer7Y].disabled = !this.useTimer[6];
+    this.grid[timer8X][timer8Y].disabled = !this.useTimer[7];
+    this.grid[timer9X][timer9Y].disabled = !this.useTimer[8];
+    this.grid[timer10X][timer10Y].disabled = !this.useTimer[9];
+    this.grid[timer11X][timer11Y].disabled = !this.useTimer[10];
+    this.grid[timer12X][timer12Y].disabled = !this.useTimer[11];
   }
 
   bool processKey(int x, int y) {

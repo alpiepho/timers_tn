@@ -36,17 +36,15 @@ TBD
 - [done] test fast number update
 - [done] test 12 timers
 
+- scrollable settings
+- settings to set timer up/down start sound
+- add sound
 - refactor for 12 timers slow and out of sync
 - refactor timer logic with state in engine
-
-- save pref for up/down of each timer
-- save pref for start time of each timer
-- dont save current value
 - declarative layout timers for performance?
-
-- modify engine for timer features
-- FINISH
+- remove button effect? (InkWell -> GestureDetector)
 
 
 ## Known Issues to Fix
-- fix settings if timer goes from first bar to next
+- multiple timers not in sync
+- timers are not accurate
