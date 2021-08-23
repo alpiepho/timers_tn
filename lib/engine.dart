@@ -45,12 +45,18 @@ class TimerSettings {
   bool enabled;
   bool down;
   int startMs;
+  int yellowMs;
+  int orangeMs;
+  int redMs;
   bool sound;
 
   TimerSettings({
     this.enabled = false,
     this.down = false,
     this.startMs = 10000,
+    this.yellowMs = 0,
+    this.orangeMs = 0,
+    this.redMs = 0,
     this.sound = false,
   });
 }

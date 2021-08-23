@@ -112,7 +112,11 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if (!this._engine.timerSettings[index].enabled || !this._engine.timerSettings[index].down) {
       durations[index] = Duration(milliseconds: 0);
     } else {
-      durations[index] = Duration(milliseconds: this._engine.timerSettings[index].startMs);
+      var startMs = this._engine.timerSettings[index].startMs;
+      durations[index] = Duration(milliseconds: startMs);
+      this._engine.timerSettings[index].yellowMs = (70 * startMs) ~/ 100;
+      this._engine.timerSettings[index].orangeMs = (40 * startMs) ~/ 100;
+      this._engine.timerSettings[index].redMs = (10 * startMs) ~/ 100;
     }
     var m = durations[index].inMinutes.remainder(60).toString().padLeft(2, '0');
     var s = durations[index].inSeconds.remainder(60).toString().padLeft(2, '0');
@@ -132,21 +136,27 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if (!this._engine.timerSettings[index].down) {
       durations[index] += Duration(milliseconds: 10);
       changed = true;
+      newStyle = newStyle.copyWith(color: kGreenColor);
     }
     if (this._engine.timerSettings[index].down && durations[index].inMilliseconds >= 10) {
       durations[index] -= Duration(milliseconds: 10);
       changed = true;
 
-      if (durations[index].inMilliseconds > 8000 && durations[index].inMilliseconds <= 10000) {
+      var greenMs = this._engine.timerSettings[index].startMs;
+      var yellowMs = this._engine.timerSettings[index].yellowMs;
+      var orangeMs = this._engine.timerSettings[index].orangeMs;
+      var redMs = this._engine.timerSettings[index].redMs;
+
+      if (durations[index].inMilliseconds > yellowMs && durations[index].inMilliseconds <= greenMs) {
         newStyle = newStyle.copyWith(color: kGreenColor);
       }
-      if (durations[index].inMilliseconds > 5000 && durations[index].inMilliseconds <= 8000) {
+      if (durations[index].inMilliseconds > orangeMs && durations[index].inMilliseconds <= yellowMs) {
         newStyle = newStyle.copyWith(color: kYellowColor);
       }
-      if (durations[index].inMilliseconds > 2000 && durations[index].inMilliseconds <= 5000) {
+      if (durations[index].inMilliseconds > redMs && durations[index].inMilliseconds <= orangeMs) {
         newStyle = newStyle.copyWith(color: kOrangeColor);
       }
-      if (durations[index].inMilliseconds <= 2000) {
+      if (durations[index].inMilliseconds <= redMs) {
         newStyle = newStyle.copyWith(color: kRedColor);
       }
     }

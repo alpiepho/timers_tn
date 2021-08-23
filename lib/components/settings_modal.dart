@@ -381,6 +381,7 @@ class _SettingsModal extends State<SettingsModal> {
             ),
 
 
+            // Timer 1 ///////////////////////////////////////////////////////////////////////////
             Divider(
               height: 20.0,
               thickness: 2.0,
@@ -418,8 +419,7 @@ class _SettingsModal extends State<SettingsModal> {
               onToggle: (index) { timerSoundToggle(1, index); },
             ),
 
-
-
+            // Timer 2 ///////////////////////////////////////////////////////////////////////////
             Divider(
               height: 20.0,
               thickness: 2.0,
@@ -432,9 +432,32 @@ class _SettingsModal extends State<SettingsModal> {
                 fontWeight: FontWeight.w700,
               ),
             ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex2,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(2, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[1].startMs.toString(),
+                  onChanged: (text) { timerStartChange(2, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex2,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(2, index); },
+            ),
 
-
-
+            // Timer 3 ///////////////////////////////////////////////////////////////////////////
             Divider(
               height: 20.0,
               thickness: 2.0,
@@ -447,6 +470,374 @@ class _SettingsModal extends State<SettingsModal> {
                 fontWeight: FontWeight.w700,
               ),
             ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex3,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(3, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[2].startMs.toString(),
+                  onChanged: (text) { timerStartChange(3, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex3,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(3, index); },
+            ),
+
+            // Timer 4 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 4",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex4,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(4, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[3].startMs.toString(),
+                  onChanged: (text) { timerStartChange(4, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex4,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(4, index); },
+            ),
+
+            // Timer 5 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 5",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex5,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(5, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[4].startMs.toString(),
+                  onChanged: (text) { timerStartChange(5, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex5,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(5, index); },
+            ),
+
+            // Timer 6 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 6",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex6,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(6, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[5].startMs.toString(),
+                  onChanged: (text) { timerStartChange(6, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex6,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(6, index); },
+            ),
+
+            // Timer 7 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 7",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex7,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(7, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[6].startMs.toString(),
+                  onChanged: (text) { timerStartChange(7, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex7,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(7, index); },
+            ),
+
+            // Timer 8 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 8",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex8,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(8, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[7].startMs.toString(),
+                  onChanged: (text) { timerStartChange(8, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex8,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(8, index); },
+            ),
+
+            // Timer 9 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 9",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex9,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(9, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[8].startMs.toString(),
+                  onChanged: (text) { timerStartChange(9, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex9,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(9, index); },
+            ),
+
+            // Timer 10 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 10",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex10,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(10, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[9].startMs.toString(),
+                  onChanged: (text) { timerStartChange(10, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex10,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(10, index); },
+            ),
+
+            // Timer 11 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 11",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex11,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(11, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[10].startMs.toString(),
+                  onChanged: (text) { timerStartChange(11, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex11,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(11, index); },
+            ),
+
+            // Timer 12 ///////////////////////////////////////////////////////////////////////////
+            Divider(
+              height: 20.0,
+              thickness: 2.0,
+            ),
+            new Text(
+              "    Timer 12",
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndex12,
+              label: "    count down",
+              onToggle: (index) { timerUpDownToggle(12, index); },
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
+              child: new TextFormField(
+                  decoration: new InputDecoration.collapsed(
+                      hintText: 'milliseconds', // TODO format as minutes:seconds
+                  ),
+                  autofocus: false,
+                  initialValue: this.engine.timerSettings[11].startMs.toString(),
+                  onChanged: (text) { timerStartChange(12, text); },
+                  style: kSettingsTextEditStyle,
+                ),
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndex12,
+              label: "    sound",
+              onToggle: (index) { timerSoundToggle(12, index); },
+            ),
+
+
 
 
 
