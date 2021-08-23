@@ -35,12 +35,12 @@ TBD
 - [done] test number colors
 - [done] test fast number update
 - [done] test 12 timers
+- [done] scrollable settings
+- [done] settings to set timer up/down start sound
+- [done] refactor timer logic with state in engine
 
-- scrollable settings
-- settings to set timer up/down start sound
 - add sound
 - refactor for 12 timers slow and out of sync
-- refactor timer logic with state in engine
 - declarative layout timers for performance?
 - remove button effect? (InkWell -> GestureDetector)
 
@@ -48,3 +48,4 @@ TBD
 ## Known Issues to Fix
 - multiple timers not in sync
 - timers are not accurate
+- timer setting is in ms

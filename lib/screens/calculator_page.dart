@@ -8,19 +8,6 @@ import 'package:timers_tn/engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
-class TimerSettings {
-  bool disabled;
-  bool up;
-  int startMs;
-  bool sound;
-
-  TimerSettings({
-    this.disabled = true,
-    this.up = false,
-    this.startMs = 10000,
-    this.sound = false,
-  });
-}
 class CalculatorPage extends StatefulWidget {
   @override
   _CalculatorPageState createState() => _CalculatorPageState();
@@ -33,7 +20,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
   bool _resetNPending = false;
   TextStyle _resetNStyle = kLabelTextStyle;
 
-  var timerSettings = new List.generate(12, (index) => TimerSettings());  // TODO move to engine
   var durations = new List.generate(12, (index) => Duration(milliseconds: 0));
   var timers = new List.generate(12, (index) => Timer(Duration(seconds: 10), () => {}));
   
@@ -123,10 +109,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
     TextStyle newStyle = kLabelTextStyle;
     timers[index].cancel();
-    if (timerSettings[index].disabled || timerSettings[index].up) {
+    if (!this._engine.timerSettings[index].enabled || !this._engine.timerSettings[index].down) {
       durations[index] = Duration(milliseconds: 0);
     } else {
-      durations[index] = Duration(milliseconds: timerSettings[index].startMs);
+      durations[index] = Duration(milliseconds: this._engine.timerSettings[index].startMs);
     }
     var m = durations[index].inMinutes.remainder(60).toString().padLeft(2, '0');
     var s = durations[index].inSeconds.remainder(60).toString().padLeft(2, '0');
@@ -137,17 +123,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
   void _timerTick10ms(int number) {
     int index = number - 1;
-    if (timerSettings[index].disabled) {
+    if (!this._engine.timerSettings[index].enabled) {
       return;
     }
 
     bool changed = false;
     TextStyle newStyle = kLabelTextStyle;
-    if (timerSettings[index].up) {
+    if (!this._engine.timerSettings[index].down) {
       durations[index] += Duration(milliseconds: 10);
       changed = true;
     }
-    if (!timerSettings[index].up && durations[index].inMilliseconds >= 10) {
+    if (this._engine.timerSettings[index].down && durations[index].inMilliseconds >= 10) {
       durations[index] -= Duration(milliseconds: 10);
       changed = true;
 
@@ -372,7 +358,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
         // TODO better way?
         if (_engine.getTimerNumber(i, j) > 0) {
-          timerSettings[_engine.getTimerNumber(i, j)-1].disabled = disabled;
+          this._engine.timerSettings[_engine.getTimerNumber(i, j)-1].enabled = !disabled;
         }
 
         var background = this._engine.grid[i][j].background;

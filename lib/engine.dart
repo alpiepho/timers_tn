@@ -41,37 +41,19 @@ class Cell {
   });
 }
 
-// class Timer():
-//     delta = DELTA
-//     start = 0
-//     current = 0
-//     formatted = "0:00.0"
-//     running = False
-//     paused = False
-//     color = GREEN
-//     color_dim = GREEN_DIM
-//     current_yellow = 0
-//     current_orange = 0
-//     current_red = 0
-//     blink = BLINK_BLINK
-//     blink_on = False
-//     blink_last = 0
-//     sound = False
-//     pressed_last = 0
+class TimerSettings {
+  bool enabled;
+  bool down;
+  int startMs;
+  bool sound;
 
-// class TimerStruct {
-//   String label;
-//   int start;
-//   bool down;
-//   int current;
-
-//   TimerStruct({
-//     this.label = '',
-//     this.start = 0,
-//     this.down = false,
-//     this.current = 0,
-//   });
-// }
+  TimerSettings({
+    this.enabled = false,
+    this.down = false,
+    this.startMs = 10000,
+    this.sound = false,
+  });
+}
 
 class Engine {
   var grid = List.generate(6, (i) => List.generate(3, (index) => Cell()),
@@ -113,9 +95,9 @@ class Engine {
   int resetAllX = -1;
   int resetAllY = -1;
 
-  var numberTimers = 1;
-  var useTimer = List.generate(12, (index) => false);
   var useTimerAll = false;
+  var timerSettings = new List.generate(12, (index) => TimerSettings());
+
 
 
   Engine() {
@@ -202,8 +184,8 @@ class Engine {
     resetAllY = col;
     col++;
     row++;
-    for (int i = 0; i < useTimer.length; i++) {
-      useTimer[i] = false;
+    for (int i = 0; i < timerSettings.length; i++) {
+      timerSettings[i].enabled = false;
     }
     useTimerAll = false;
     adjustTimers();
@@ -214,9 +196,11 @@ class Engine {
   //
   String pack() {
     String result = "VER "+kVersion+";"; // match with unpack()
-    result += numberTimers.toString() + ";";
-    for (var value in useTimer) {
-      result += value.toString() + ";";
+    for (int i = 0; i < timerSettings.length; i++) {
+      result += timerSettings[i].enabled.toString() + ";";
+      result += timerSettings[i].down.toString() + ";";
+      result += timerSettings[i].startMs.toString() + ";";
+      result += timerSettings[i].sound.toString() + ";";
     }
     return result;
   }
@@ -228,9 +212,11 @@ class Engine {
     int index = 0;
     if (parts[index++] != ("VER "+kVersion)) return; // match with pack()
 
-    numberTimers = int.parse(parts[index++]);
-    for (int i = 0; i < useTimer.length; i++) {
-      useTimer[i] = parts[index++] == "true";
+     for (int i = 0; i < timerSettings.length; i++) {
+      timerSettings[i].enabled = parts[index++] == "true";
+      timerSettings[i].down = parts[index++] == "true";
+      timerSettings[i].startMs = int.parse(parts[index++]);
+      timerSettings[i].sound = parts[index++] == "true";
     }
 
     adjustTimers();
@@ -250,77 +236,77 @@ class Engine {
 
  
   void adjustTimers() {
-    this.grid[timer1X][timer1Y].disabled = !this.useTimer[0];
-    this.grid[timer2X][timer2Y].disabled = !this.useTimer[1];
-    this.grid[timer3X][timer3Y].disabled = !this.useTimer[2];
-    this.grid[timer4X][timer4Y].disabled = !this.useTimer[3];
-    this.grid[timer5X][timer5Y].disabled = !this.useTimer[4];
-    this.grid[timer6X][timer6Y].disabled = !this.useTimer[5];
-    this.grid[timer7X][timer7Y].disabled = !this.useTimer[6];
-    this.grid[timer8X][timer8Y].disabled = !this.useTimer[7];
-    this.grid[timer9X][timer9Y].disabled = !this.useTimer[8];
-    this.grid[timer10X][timer10Y].disabled = !this.useTimer[9];
-    this.grid[timer11X][timer11Y].disabled = !this.useTimer[10];
-    this.grid[timer12X][timer12Y].disabled = !this.useTimer[11];
+    this.grid[timer1X][timer1Y].disabled = !this.timerSettings[0].enabled;
+    this.grid[timer2X][timer2Y].disabled = !this.timerSettings[1].enabled;
+    this.grid[timer3X][timer3Y].disabled = !this.timerSettings[2].enabled;
+    this.grid[timer4X][timer4Y].disabled = !this.timerSettings[3].enabled;
+    this.grid[timer5X][timer5Y].disabled = !this.timerSettings[4].enabled;
+    this.grid[timer6X][timer6Y].disabled = !this.timerSettings[5].enabled;
+    this.grid[timer7X][timer7Y].disabled = !this.timerSettings[6].enabled;
+    this.grid[timer8X][timer8Y].disabled = !this.timerSettings[7].enabled;
+    this.grid[timer9X][timer9Y].disabled = !this.timerSettings[8].enabled;
+    this.grid[timer10X][timer10Y].disabled = !this.timerSettings[9].enabled;
+    this.grid[timer11X][timer11Y].disabled = !this.timerSettings[10].enabled;
+    this.grid[timer12X][timer12Y].disabled = !this.timerSettings[11].enabled;
   }
 
   bool processKey(int x, int y) {
     var result = false;
     if (grid[x][y].disabled) return result;
 
-    if (x == pauseAllX && y == pauseAllY) {
-      print("pauseAll");
-    }
-     if (x == playAllX && y == playAllY) {
-      print("playAll");
-    }
-   if (x == settingsX && y == settingsY) {
-      print("settings");
-    }
+  //   if (x == pauseAllX && y == pauseAllY) {
+  //     print("pauseAll");
+  //   }
+  //    if (x == playAllX && y == playAllY) {
+  //     print("playAll");
+  //   }
+  //  if (x == settingsX && y == settingsY) {
+  //     print("settings");
+  //   }
   
-    if (x == timer1X && y == timer1Y) {
-      print("timer1");
-    }
-    if (x == timer2X && y == timer2Y) {
-      print("timer2");
-    }
-    if (x == timer3X && y == timer3Y) {
-      print("timer3");
-    }
-    if (x == timer4X && y == timer4Y) {
-      print("timer4");
-    }
-    if (x == timer5X && y == timer5Y) {
-      print("timer5");
-    }
-    if (x == timer6X && y == timer6Y) {
-      print("timer6");
-    }
-    if (x == timer7X && y == timer7Y) {
-      print("timer7");
-    }
-    if (x == timer8X && y == timer8Y) {
-      print("timer8");
-    }
-    if (x == timer9X && y == timer9Y) {
-      print("timer9");
-    }
-    if (x == timer10X && y == timer10Y) {
-      print("timer10");
-    }
-    if (x == timer11X && y == timer11Y) {
-      print("timer11");
-    }
-    if (x == timer12X && y == timer12Y) {
-      print("timer12");
-    }
+  //   if (x == timer1X && y == timer1Y) {
+  //     print("timer1");
+  //   }
+  //   if (x == timer2X && y == timer2Y) {
+  //     print("timer2");
+  //   }
+  //   if (x == timer3X && y == timer3Y) {
+  //     print("timer3");
+  //   }
+  //   if (x == timer4X && y == timer4Y) {
+  //     print("timer4");
+  //   }
+  //   if (x == timer5X && y == timer5Y) {
+  //     print("timer5");
+  //   }
+  //   if (x == timer6X && y == timer6Y) {
+  //     print("timer6");
+  //   }
+  //   if (x == timer7X && y == timer7Y) {
+  //     print("timer7");
+  //   }
+  //   if (x == timer8X && y == timer8Y) {
+  //     print("timer8");
+  //   }
+  //   if (x == timer9X && y == timer9Y) {
+  //     print("timer9");
+  //   }
+  //   if (x == timer10X && y == timer10Y) {
+  //     print("timer10");
+  //   }
+  //   if (x == timer11X && y == timer11Y) {
+  //     print("timer11");
+  //   }
+  //   if (x == timer12X && y == timer12Y) {
+  //     print("timer12");
+  //   }
 
-    if (x == resetNX && y == restNY) {
-      print("resetN");
-    }
-    if (x == resetAllX && y == resetAllY) {
-      print("resetAll");
-    }
+  //   if (x == resetNX && y == restNY) {
+  //     print("resetN");
+  //   }
+  //   if (x == resetAllX && y == resetAllY) {
+  //     print("resetAll");
+  //   }
 
     return result;
   }
