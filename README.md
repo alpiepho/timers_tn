@@ -40,10 +40,12 @@ TBD
 - [done] refactor timer logic with state in engine
 - [done] down colors as percent
 - [done] up color green
+- [done] favicon etc
 
 - add sound
 - declarative layout timers for performance?
-- favicon etc
+- refactor timer duration based on computed time instead of assuming loop is accurate
+
 
 
 ## Known Issues to Fix
