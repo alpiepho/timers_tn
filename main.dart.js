@@ -58475,7 +58475,7 @@ s.r=b===1&&!0
 this.aD(new Y.a58(this,a,b))},
 A1:function(){var s=0,r=P.E(t.z),q=this,p
 var $async$A1=P.z(function(a,b){if(a===1)return P.B(b,r)
-while(true)switch(s){case 0:T.a7Z("https://github.com/alpiepho/hexcalc_tn/blob/master/README.md")
+while(true)switch(s){case 0:T.a7Z("https://github.com/alpiepho/timers_tn/blob/master/README.md")
 p=q.d
 K.o4(p==null?H.d(H.q("context")):p,!1).dh(0)
 return P.C(null,r)}})
