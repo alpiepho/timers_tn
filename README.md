@@ -41,8 +41,8 @@ TBD
 - [done] down colors as percent
 - [done] up color green
 - [done] favicon etc
+- [done] add sound
 
-- add sound
 - declarative layout timers for performance?
 - refactor timer duration based on computed time instead of assuming loop is accurate
 
@@ -54,3 +54,5 @@ TBD
 - timer setting is in ms
 - remove button effect? (InkWell -> GestureDetector)
 - reset on init
+- record tone as sound instead of boing?
+- chose sounds?
