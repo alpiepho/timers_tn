@@ -1,4 +1,4 @@
-import 'dart:convert';
+//import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:timers_tn/components/timer_button.dart';
@@ -7,6 +7,7 @@ import 'package:timers_tn/constants.dart';
 import 'package:timers_tn/engine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
+import 'package:just_audio/just_audio.dart';
 
 class CalculatorPage extends StatefulWidget {
   @override
@@ -14,6 +15,8 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
+
+  late AudioPlayer player;
 
   Engine _engine = Engine();
 
@@ -117,6 +120,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       this._engine.timerSettings[index].yellowMs = (70 * startMs) ~/ 100;
       this._engine.timerSettings[index].orangeMs = (40 * startMs) ~/ 100;
       this._engine.timerSettings[index].redMs = (10 * startMs) ~/ 100;
+      this._engine.timerSettings[index].soundPlayed = false;
     }
     var m = durations[index].inMinutes.remainder(60).toString().padLeft(2, '0');
     var s = durations[index].inSeconds.remainder(60).toString().padLeft(2, '0');
@@ -156,8 +160,20 @@ class _CalculatorPageState extends State<CalculatorPage> {
       if (durations[index].inMilliseconds > redMs && durations[index].inMilliseconds <= orangeMs) {
         newStyle = newStyle.copyWith(color: kOrangeColor);
       }
-      if (durations[index].inMilliseconds <= redMs) {
+      if (durations[index].inMilliseconds > 0 && durations[index].inMilliseconds <= redMs) {
         newStyle = newStyle.copyWith(color: kRedColor);
+      }
+      if (durations[index].inMilliseconds == 0) {
+        newStyle = kLabelTextDoneStyle;
+        newStyle = newStyle.copyWith(color: kRedColor);
+      }
+    }
+    if (this._engine.timerSettings[index].down && durations[index].inMilliseconds == 0) {
+      if (this._engine.timerSettings[index].sound && !this._engine.timerSettings[index].soundPlayed) {
+        this._engine.timerSettings[index].soundPlayed = true;
+        print("ding");
+        player.setAsset('audio/Boing.mp3');
+        player.play();
       }
     }
     if (changed) {
@@ -284,10 +300,18 @@ class _CalculatorPageState extends State<CalculatorPage> {
   @override
   initState() {
     super.initState();
+    player = AudioPlayer();
+
     _loadEngine();
     for (int i = 1; i <= 12; i++) {
       _timerReset(i);
     }
+  }
+
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
   }
 
   @override

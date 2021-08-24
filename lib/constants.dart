@@ -46,6 +46,13 @@ const kLabelTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const kLabelTextDoneStyle = TextStyle(
+  fontSize: 24.0,
+  color: Colors.white,
+  fontWeight: FontWeight.bold,
+  fontStyle: FontStyle.italic,
+);
+
 const kNumberTextStyle = TextStyle(
   fontSize: 36,
   color: Colors.white,

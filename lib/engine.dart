@@ -49,6 +49,7 @@ class TimerSettings {
   int orangeMs;
   int redMs;
   bool sound;
+  bool soundPlayed;
 
   TimerSettings({
     this.enabled = false,
@@ -58,6 +59,7 @@ class TimerSettings {
     this.orangeMs = 0,
     this.redMs = 0,
     this.sound = false,
+    this.soundPlayed = false,
   });
 }
 
