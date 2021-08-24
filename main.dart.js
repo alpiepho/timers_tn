@@ -17088,10 +17088,10 @@ l.Pu(!0,f,f,!0,!0,f)
 return l},
 adu:function(a,b){return new N.Uz(a,b)},
 Uy:function(a,b,c,d,e,f,g,h){return new N.dF(f,h==null?new P.cs(Date.now(),!1):h,g,b,d,e,c,a)},
-ajd:function(a){var s=null,r=new N.MS()
-if(r.$2(a,"mpd"))return new N.zJ(a,s,s,s,$.LJ().uj())
-else if(r.$2(a,"m3u8"))return new N.AM(a,s,s,s,$.LJ().uj())
-else return new N.Cz(a,s,s,s,$.LJ().uj())},
+ajd:function(a,b){var s=null,r=new N.MS()
+if(r.$2(a,"mpd"))return new N.zJ(a,b,s,s,$.LJ().uj())
+else if(r.$2(a,"m3u8"))return new N.AM(a,b,s,s,$.LJ().uj())
+else return new N.Cz(a,b,s,s,$.LJ().uj())},
 anj:function(a,b){var s=new N.pG(U.dT(null,null,!1,t.Cs),a)
 s.PK(a,b)
 return s},
@@ -59076,7 +59076,6 @@ if(b.b==null)b.b=$.oi.$0()
 P.qe(q[d].gz_())}r=!0}c=c[d]
 if(c.b&&C.e.aE(f.y[d].a,e)===0)if(c.r&&!c.x){c.x=!0
 P.qe("boing")
-f.gA7().q_(N.ajd(P.iT("asset:///audio/Boing.mp3",0,null)),null,!0)
 f.gA7().e3(0)}if(r){c=f.y
 i=C.b.hH(C.e.i(C.e.aE(c[d].a,6e7)%60),2,"0")
 h=C.b.hH(C.e.i(C.e.aE(c[d].a,1e6)%60),2,"0")
@@ -59166,6 +59165,7 @@ return P.D($async$wX,r)},
 b_:function(){var s,r=this
 r.bt()
 r.d=N.ajb()
+r.gA7().q_(N.ajd(P.iT("https://alpiepho.github.io/timers_tn/assets/assets/audio/Boing.mp3",0,null),null),null,!0)
 r.qU()
 for(s=1;s<=12;++s)r.xu(s)},
 p:function(a){this.gA7().p(0)
