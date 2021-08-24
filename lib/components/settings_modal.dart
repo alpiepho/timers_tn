@@ -200,7 +200,7 @@ class _SettingsModal extends State<SettingsModal> {
   }
 
   void onHelp() async {
-    launch('https://github.com/alpiepho/hexcalc_tn/blob/master/README.md');
+    launch('https://github.com/alpiepho/timers_tn/blob/master/README.md');
     Navigator.of(context).pop();
   }
 

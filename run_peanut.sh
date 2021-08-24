@@ -19,7 +19,7 @@ sed -e 's/"index.html",/"https:\/\/alpiepho.github.io\/timers_tn\/index.html",/'
 mv /tmp/run_peanut.txt flutter_service_worker.js
 sed -e 's/"assets\/NOTICES",/"https:\/\/alpiepho.github.io\/timers_tn\/assets\/NOTICES",/' flutter_service_worker.js                       > /tmp/run_peanut.txt
 mv /tmp/run_peanut.txt flutter_service_worker.js
-sed -e 's/"assets\/audio",/"https:\/\/alpiepho.github.io\/timers_tn\/assets\/audio",/' flutter_service_worker.js                           > /tmp/run_peanut.txt
+sed -e 's/"assets\/audio",/"https:\/\/alpiepho.github.io\/timers_tn\/assets\/assets\/audio",/' flutter_service_worker.js                   > /tmp/run_peanut.txt
 mv /tmp/run_peanut.txt flutter_service_worker.js
 sed -e 's/"assets\/AssetManifest.json",/"https:\/\/alpiepho.github.io\/timers_tn\/assets\/AssetManifest.json",/' flutter_service_worker.js > /tmp/run_peanut.txt
 mv /tmp/run_peanut.txt flutter_service_worker.js
