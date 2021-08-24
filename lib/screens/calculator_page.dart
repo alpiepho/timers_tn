@@ -189,7 +189,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
         this._engine.timerSettings[index].soundPlayed = true;
         //DEBUG
         print("boing");
-        player.setAsset('audio/Boing.mp3');
+        //player.setUrl('https://alpiepho.github.io/timers_tn/assets/assets/audio/Boing.mp3');
         player.play();
       }
     }
@@ -320,6 +320,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   initState() {
     super.initState();
     player = AudioPlayer();
+    player.setUrl('https://alpiepho.github.io/timers_tn/assets/assets/audio/Boing.mp3');
 
     _loadEngine();
     for (int i = 1; i <= 12; i++) {
