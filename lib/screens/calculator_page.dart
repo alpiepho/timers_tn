@@ -171,7 +171,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
     if (this._engine.timerSettings[index].down && durations[index].inMilliseconds == 0) {
       if (this._engine.timerSettings[index].sound && !this._engine.timerSettings[index].soundPlayed) {
         this._engine.timerSettings[index].soundPlayed = true;
-        print("ding");
+        print("boing");
         player.setAsset('audio/Boing.mp3');
         player.play();
       }
