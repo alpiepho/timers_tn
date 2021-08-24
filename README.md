@@ -42,15 +42,13 @@ TBD
 - [done] up color green
 - [done] favicon etc
 - [done] add sound
+- [done] refactor timer duration based on computed time instead of assuming loop is accurate
 
 - declarative layout timers for performance?
-- refactor timer duration based on computed time instead of assuming loop is accurate
-
-
 
 ## Known Issues to Fix
-- multiple timers not in sync
-- timers are not accurate
+- [done] multiple timers not in sync
+- [done] timers are not accurate
 - timer setting is in ms
 - remove button effect? (InkWell -> GestureDetector)
 - reset on init

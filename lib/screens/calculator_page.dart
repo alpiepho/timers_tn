@@ -23,6 +23,10 @@ class _CalculatorPageState extends State<CalculatorPage> {
   bool _resetNPending = false;
   TextStyle _resetNStyle = kLabelTextStyle;
 
+  // timers run every 10ms to update duration
+  // duration used to format display label for each timer
+  // stopwatch used to more precisely compute duration vs 10ms timer loop
+  var stopwatches = new List.generate(12, (index) => Stopwatch());
   var durations = new List.generate(12, (index) => Duration(milliseconds: 0));
   var timers = new List.generate(12, (index) => Timer(Duration(seconds: 10), () => {}));
   
@@ -112,6 +116,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
     TextStyle newStyle = kLabelTextStyle;
     timers[index].cancel();
+    stopwatches[index].reset();
     if (!this._engine.timerSettings[index].enabled || !this._engine.timerSettings[index].down) {
       durations[index] = Duration(milliseconds: 0);
     } else {
@@ -138,12 +143,20 @@ class _CalculatorPageState extends State<CalculatorPage> {
     bool changed = false;
     TextStyle newStyle = kLabelTextStyle;
     if (!this._engine.timerSettings[index].down) {
-      durations[index] += Duration(milliseconds: 10);
+      durations[index] = Duration(milliseconds: stopwatches[index].elapsedMilliseconds);
       changed = true;
       newStyle = newStyle.copyWith(color: kGreenColor);
     }
-    if (this._engine.timerSettings[index].down && durations[index].inMilliseconds >= 10) {
-      durations[index] -= Duration(milliseconds: 10);
+    if (this._engine.timerSettings[index].down && durations[index].inMilliseconds > 0) {
+      var milliseconds = this._engine.timerSettings[index].startMs - stopwatches[index].elapsedMilliseconds;
+      if (milliseconds > 0) {
+        durations[index] = Duration(milliseconds: milliseconds);
+      }
+      else {
+        durations[index] = Duration(milliseconds: 0);
+      }
+
+
       changed = true;
 
       var greenMs = this._engine.timerSettings[index].startMs;
@@ -166,11 +179,15 @@ class _CalculatorPageState extends State<CalculatorPage> {
       if (durations[index].inMilliseconds == 0) {
         newStyle = kLabelTextDoneStyle;
         newStyle = newStyle.copyWith(color: kRedColor);
+        stopwatches[index].stop();
+        //DEBUG
+        print(stopwatches[index].elapsedMilliseconds);
       }
     }
     if (this._engine.timerSettings[index].down && durations[index].inMilliseconds == 0) {
       if (this._engine.timerSettings[index].sound && !this._engine.timerSettings[index].soundPlayed) {
         this._engine.timerSettings[index].soundPlayed = true;
+        //DEBUG
         print("boing");
         player.setAsset('audio/Boing.mp3');
         player.play();
@@ -188,6 +205,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
   void _timerPause(int number) {
     int index = number - 1;
     if (timers[index].isActive) {
+      stopwatches[index].stop();
       timers[index].cancel();
     }
   }
@@ -198,6 +216,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
       timers[index] = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
         _timerTick10ms(number);
       });
+      stopwatches[index].start();
     }
   }
 
