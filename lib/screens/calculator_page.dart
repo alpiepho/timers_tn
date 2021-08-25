@@ -258,11 +258,6 @@ class _CalculatorPageState extends State<CalculatorPage> {
 
 
   void _notifyEngine(int x, int y) async {
-    if(this._engine.processKey(x, y)) {
-      // only some keys should cause page to re-build
-      _fromEngine();
-    }
-
     switch (this._engine.getKeyType(x, y)) {
       case KeyType.pauseAll:
         for (int i = 1; i <= 12; i++) {

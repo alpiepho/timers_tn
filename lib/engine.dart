@@ -104,6 +104,9 @@ class Engine {
   int resetAllY = -1;
 
   var useTimerAll = false;
+  var countDownAll = false;
+  var soundAll = false;
+  var startMsAll = 10000;
   var timerSettings = new List.generate(12, (index) => TimerSettings());
 
 
@@ -196,6 +199,10 @@ class Engine {
       timerSettings[i].enabled = false;
     }
     useTimerAll = false;
+    useTimerAll = false;
+    countDownAll = false;
+    soundAll = false;
+    startMsAll = 10000;
     adjustTimers();
   }
 
@@ -257,68 +264,6 @@ class Engine {
     this.grid[timer11X][timer11Y].disabled = !this.timerSettings[10].enabled;
     this.grid[timer12X][timer12Y].disabled = !this.timerSettings[11].enabled;
   }
-
-  bool processKey(int x, int y) {
-    var result = false;
-    if (grid[x][y].disabled) return result;
-
-  //   if (x == pauseAllX && y == pauseAllY) {
-  //     print("pauseAll");
-  //   }
-  //    if (x == playAllX && y == playAllY) {
-  //     print("playAll");
-  //   }
-  //  if (x == settingsX && y == settingsY) {
-  //     print("settings");
-  //   }
-  
-  //   if (x == timer1X && y == timer1Y) {
-  //     print("timer1");
-  //   }
-  //   if (x == timer2X && y == timer2Y) {
-  //     print("timer2");
-  //   }
-  //   if (x == timer3X && y == timer3Y) {
-  //     print("timer3");
-  //   }
-  //   if (x == timer4X && y == timer4Y) {
-  //     print("timer4");
-  //   }
-  //   if (x == timer5X && y == timer5Y) {
-  //     print("timer5");
-  //   }
-  //   if (x == timer6X && y == timer6Y) {
-  //     print("timer6");
-  //   }
-  //   if (x == timer7X && y == timer7Y) {
-  //     print("timer7");
-  //   }
-  //   if (x == timer8X && y == timer8Y) {
-  //     print("timer8");
-  //   }
-  //   if (x == timer9X && y == timer9Y) {
-  //     print("timer9");
-  //   }
-  //   if (x == timer10X && y == timer10Y) {
-  //     print("timer10");
-  //   }
-  //   if (x == timer11X && y == timer11Y) {
-  //     print("timer11");
-  //   }
-  //   if (x == timer12X && y == timer12Y) {
-  //     print("timer12");
-  //   }
-
-  //   if (x == resetNX && y == restNY) {
-  //     print("resetN");
-  //   }
-  //   if (x == resetAllX && y == resetAllY) {
-  //     print("resetAll");
-  //   }
-
-    return result;
-  }
-
 
   KeyType getKeyType(int x, int y) {
     KeyType t = KeyType.none;

@@ -101,6 +101,7 @@ class _SettingsModal extends State<SettingsModal> {
   late int _timerUpDownIndex10;
   late int _timerUpDownIndex11;
   late int _timerUpDownIndex12;
+  late int _timerUpDownIndexAll;
 
   late int _timerSoundIndex1;
   late int _timerSoundIndex2;
@@ -114,6 +115,7 @@ class _SettingsModal extends State<SettingsModal> {
   late int _timerSoundIndex10;
   late int _timerSoundIndex11;
   late int _timerSoundIndex12;
+  late int _timerSoundIndexAll;
 
   void useTimerToggle(int number, int index) {
     this.engine.timerSettings[number-1].enabled = ((index == 1) ? true : false);
@@ -172,6 +174,23 @@ class _SettingsModal extends State<SettingsModal> {
     });
   }
 
+  void timerUpDownToggleAll(int index) {
+    this.engine.countDownAll = ((index == 1) ? true : false);
+    this._timerUpDownIndexAll = index;
+    timerUpDownToggle(1, index);
+    timerUpDownToggle(2, index);
+    timerUpDownToggle(3, index);
+    timerUpDownToggle(4, index);
+    timerUpDownToggle(5, index);
+    timerUpDownToggle(6, index);
+    timerUpDownToggle(7, index);
+    timerUpDownToggle(8, index);
+    timerUpDownToggle(9, index);
+    timerUpDownToggle(10, index);
+    timerUpDownToggle(11, index);
+    timerUpDownToggle(12, index);
+  }
+
   void timerStartChange(int number, String value) {
     try {
         this.engine.timerSettings[number-1].startMs = int.parse(value);
@@ -197,6 +216,23 @@ class _SettingsModal extends State<SettingsModal> {
         case 12: this._timerSoundIndex12 = index; break;
       }     
     });
+  }
+
+  void timerSoundToggleAll(int index) {
+    this.engine.soundAll = ((index == 1) ? true : false);
+    this._timerSoundIndexAll = index;
+    timerSoundToggle(1, index);
+    timerSoundToggle(2, index);
+    timerSoundToggle(3, index);
+    timerSoundToggle(4, index);
+    timerSoundToggle(5, index);
+    timerSoundToggle(6, index);
+    timerSoundToggle(7, index);
+    timerSoundToggle(8, index);
+    timerSoundToggle(9, index);
+    timerSoundToggle(10, index);
+    timerSoundToggle(11, index);
+    timerSoundToggle(12, index);
   }
 
   void onHelp() async {
@@ -254,6 +290,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._timerUpDownIndex10 = (this.engine.timerSettings[9].down ? 1 : 0);
     this._timerUpDownIndex11 = (this.engine.timerSettings[10].down ? 1 : 0);
     this._timerUpDownIndex12 = (this.engine.timerSettings[11].down ? 1 : 0);
+    this._timerUpDownIndexAll = (this.engine.countDownAll ? 1 : 0);
 
     this._timerSoundIndex1 = (this.engine.timerSettings[0].sound ? 1 : 0);
     this._timerSoundIndex2 = (this.engine.timerSettings[1].sound ? 1 : 0);
@@ -267,6 +304,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._timerSoundIndex10 = (this.engine.timerSettings[9].sound ? 1 : 0);
     this._timerSoundIndex11 = (this.engine.timerSettings[10].sound ? 1 : 0);
     this._timerSoundIndex12 = (this.engine.timerSettings[11].sound ? 1 : 0);
+    this._timerSoundIndexAll = (this.engine.soundAll ? 1 : 0);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -373,11 +411,23 @@ class _SettingsModal extends State<SettingsModal> {
               label: "    Timer 12",
               onToggle: (index) { useTimerToggle(12, index); },
             ),
-            new SizedBox(height: 10),
+            new SizedBox(height: 20),
             ToggleChoice(
               index: this._useTimerIndexAll,
               label: "    Enable All Timers",
               onToggle: useTimerToggleAll,
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerUpDownIndexAll,
+              label: "    Count Down All Timers",
+              onToggle: timerUpDownToggleAll,
+            ),
+            new SizedBox(height: 10),
+            ToggleChoice(
+              index: this._timerSoundIndexAll,
+              label: "    Sound on All Timers",
+              onToggle: timerSoundToggleAll,
             ),
 
 

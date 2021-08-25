@@ -43,14 +43,23 @@ TBD
 - [done] favicon etc
 - [done] add sound
 - [done] refactor timer duration based on computed time instead of assuming loop is accurate
-
-- declarative layout timers for performance?
-
-## Known Issues to Fix
 - [done] multiple timers not in sync
 - [done] timers are not accurate
+- [done] all buttons for down, sound
+
+- declarative layout timers for performance?
+- change toggle to checkbox
+- TimerEnableCard
+- TimerSettingCard
+- TimerButtonCard
+- Balance logic between timer page an engine
+- finish README
+- QR code
+- wrapup soon
+
+## Known Issues to Fix
 - timer setting is in ms
-- remove button effect? (InkWell -> GestureDetector)
 - reset on init
+- sound does not work as PWA
 - record tone as sound instead of boing?
 - chose sounds?
