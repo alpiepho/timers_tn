@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:timers_tn/screens/calculator_page.dart';
+import 'package:timers_tn/screens/timers_page.dart';
 
 void main() {
   //runApp(Calculator());

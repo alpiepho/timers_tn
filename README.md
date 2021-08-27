@@ -49,8 +49,8 @@ TBD
 - [done] set all startMs
 - [done] TimerEnableCard
 - [done] TimerSettingCard
+- [done] rename calc_page
 
-- rename calc_page
 - declarative layout timers for performance?
 - change toggle to checkbox
 - TimerButtonCard
