@@ -26,9 +26,9 @@ class _TimersPageState extends State<TimersPage> {
   // timers run every 10ms to update duration
   // duration used to format display label for each timer
   // stopwatch used to more precisely compute duration vs 10ms timer loop
-  var stopwatches = new List.generate(12, (index) => Stopwatch());
-  var durations = new List.generate(12, (index) => Duration(milliseconds: 0));
-  var timers = new List.generate(12, (index) => Timer(Duration(seconds: 10), () => {}));
+  var stopwatches = new List.generate(NUM_TIMERS, (index) => Stopwatch());
+  var durations = new List.generate(NUM_TIMERS, (index) => Duration(milliseconds: 0));
+  var timers = new List.generate(NUM_TIMERS, (index) => Timer(Duration(seconds: 10), () => {}));
   
   // state variables, not sure if these can be in a List
   String _timerLabel1 = "00:00.00";
@@ -55,6 +55,7 @@ class _TimersPageState extends State<TimersPage> {
   TextStyle _timerStyle11 = kLabelTextStyle;
   String _timerLabel12 = "00:00.00";
   TextStyle _timerStyle12 = kLabelTextStyle;
+  // TIMER24 todo
 
   void _timerState(int number, String newLabel, TextStyle newStyle) {
     setState(() {
@@ -107,6 +108,7 @@ class _TimersPageState extends State<TimersPage> {
             _timerLabel12 = newLabel;
             _timerStyle12 = newStyle;
           break;
+        // TIMER24 todo
       }
     });    
   }
@@ -262,18 +264,18 @@ class _TimersPageState extends State<TimersPage> {
   void _notifyEngine(int x, int y) async {
     switch (this._engine.getKeyType(x, y)) {
       case KeyType.pauseAll:
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= NUM_TIMERS; i++) {
           _timerPause(i);
         }
         break;
       case KeyType.playAll:
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= NUM_TIMERS; i++) {
           _timerPlay(i);
         }
         break;
 
       case KeyType.resetAll:
-        for (int i = 1; i <= 12; i++) {
+        for (int i = 1; i <= NUM_TIMERS; i++) {
           _timerReset(i);
         }
         break;
@@ -309,7 +311,7 @@ class _TimersPageState extends State<TimersPage> {
     player.setUrl('https://alpiepho.github.io/timers_tn/assets/assets/audio/Boing.mp3');
 
     _loadEngine();
-    for (int i = 1; i <= 12; i++) {
+    for (int i = 1; i <= NUM_TIMERS; i++) {
       _timerReset(i);
     }
   }
@@ -376,6 +378,7 @@ class _TimersPageState extends State<TimersPage> {
       for (var j = 0; j < this._engine.grid[0].length; j++) {
         var label = this._engine.getLabel(i, j);
         var style = kLabelTextStyle;
+        // TIMER24 todo
         switch (count) {
           case 3: label = _timerLabel1; style = _timerStyle1; break;
           case 4: label = _timerLabel2; style = _timerStyle2; break;
@@ -445,10 +448,13 @@ class _TimersPageState extends State<TimersPage> {
         count += 1;
       }
       var row = new Row(children: rowWidgets);
+      // TIMER24
+      // var container = new Container(
+      //   height: 8 * mainColumnHeightPortrait / 10,
+      //   child: row,
+      // );
       var container = new Container(
-        height: (this._engine.grid[i][0].halfHeight
-            ? mainColumnHeightPortrait / 2
-            : mainColumnHeightPortrait),
+        height: mainColumnHeightPortrait,
         child: row,
       );
       colWidgets.add(container);

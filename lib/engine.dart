@@ -1,6 +1,15 @@
 //import 'package:flutter/material.dart';
 import 'package:timers_tn/constants.dart';
 
+
+// TIMER24
+// const NUM_ROWS = 10;
+// const NUM_COLS = 3;
+// const NUM_TIMERS = 24;
+const NUM_ROWS = 6;
+const NUM_COLS = 3;
+const NUM_TIMERS = 12;
+
 enum KeyType {
   pauseAll,
   playAll,
@@ -12,14 +21,14 @@ enum KeyType {
 }
 class Cell {
   String label;
-  bool halfHeight;
+  //bool halfHeight;
   int flex;
   bool disabled;
   bool active;
 
   Cell({
     this.label = '',
-    this.halfHeight = false,
+    //this.halfHeight = false,
     this.flex = 1,
     this.disabled = false,
     this.active = false,
@@ -55,7 +64,7 @@ class TimerSettings {
 }
 
 class Engine {
-  var grid = List.generate(6, (i) => List.generate(3, (index) => Cell()),
+  var grid = List.generate(NUM_ROWS, (i) => List.generate(NUM_COLS, (index) => Cell()),
       growable: false);
   int pauseAllX = -1;
   int pauseAllY = -1;
@@ -73,12 +82,11 @@ class Engine {
   var countDownAll = false;
   var soundAll = false;
   var startMsAll = "10000";
-  var timerSettings = new List.generate(12, (index) => TimerSettings());
+  var timerSettings = new List.generate(NUM_TIMERS, (index) => TimerSettings());
 
 
 
   Engine() {
-    int index = 0;
     int row = 0;
     int col = 0;
     grid[row][col] = new Cell(label: "PauseAll");
@@ -93,91 +101,21 @@ class Engine {
     settingsX = row;
     settingsY = col;
     col++;
-    row++;
-    col = 0;
 
-
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
+    for (var index = 0; index < NUM_TIMERS; index++) {
+      if ((index % NUM_COLS) == 0) {
+        row++;
+        col = 0;
+      }
+      print(row.toString() + " " + col.toString());
+      grid[row][col] = new Cell(label: "00:00.00");
+      timerSettings[index].x = row;
+      timerSettings[index].y = col;
+      timerSettings[index].type = KeyType.timer;
+      col++;
+    }
     row++;
     col = 0;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    row++;
-    col = 0;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    row++;
-    col = 0;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    grid[row][col] = new Cell(label: "00:00.00");
-    timerSettings[index].x = row;
-    timerSettings[index].y = col;
-    timerSettings[index].type = KeyType.timer;
-    index++;
-    col++;
-    row++;
-    col = 0;
-
 
     grid[row][col] = new Cell(label: "ResetN");
     resetNX = row;
@@ -246,7 +184,7 @@ class Engine {
 
  
   void adjustTimers() {
-    for (var index = 0; index < 12; index++) {
+    for (var index = 0; index < NUM_TIMERS; index++) {
       var x = timerSettings[index].x;
       var y = timerSettings[index].y;
       this.grid[x][y].disabled = !this.timerSettings[index].enabled;
@@ -265,7 +203,7 @@ class Engine {
       t = KeyType.settings;
     }
   
-    for (var index = 0; index < 12; index++) {
+    for (var index = 0; index < NUM_TIMERS; index++) {
       if (x == timerSettings[index].x && y == timerSettings[index].y) {
         t = timerSettings[index].type;
       }
@@ -283,7 +221,7 @@ class Engine {
   int getTimerNumber(int x, int y) {
     var result = 0;
 
-    for (var index = 0; index < 12; index++) {
+    for (var index = 0; index < NUM_TIMERS; index++) {
       if (x == timerSettings[index].x && y == timerSettings[index].y) {
         result = index + 1;
       }

@@ -88,8 +88,7 @@ Below are some things I learned with this project.
 - [done] QR code
 - [done] finish README
 
-- wrapup soon
-- 24 timers? eliminate rows if not used?
+- finish 24 timers as stress test
 
 ## Known Issues to Fix and TODO
 - timer setting is in ms

@@ -47,6 +47,19 @@ class _SettingsModal extends State<SettingsModal> {
   late int _useTimerIndex10;
   late int _useTimerIndex11;
   late int _useTimerIndex12;
+  // TIMER24
+  late int _useTimerIndex13;
+  late int _useTimerIndex14;
+  late int _useTimerIndex15;
+  late int _useTimerIndex16;
+  late int _useTimerIndex17;
+  late int _useTimerIndex18;
+  late int _useTimerIndex19;
+  late int _useTimerIndex20;
+  late int _useTimerIndex21;
+  late int _useTimerIndex22;
+  late int _useTimerIndex23;
+  late int _useTimerIndex24;
   late int _useTimerIndexAll;
 
   late int _timerUpDownIndex1;
@@ -61,6 +74,7 @@ class _SettingsModal extends State<SettingsModal> {
   late int _timerUpDownIndex10;
   late int _timerUpDownIndex11;
   late int _timerUpDownIndex12;
+  // TIMER24 todo
   late int _timerUpDownIndexAll;
 
   late int _timerSoundIndex1;
@@ -75,6 +89,7 @@ class _SettingsModal extends State<SettingsModal> {
   late int _timerSoundIndex10;
   late int _timerSoundIndex11;
   late int _timerSoundIndex12;
+  // TIMER24 todo
   late int _timerSoundIndexAll;
 
   late String _timerStartMs1;
@@ -89,6 +104,7 @@ class _SettingsModal extends State<SettingsModal> {
   late String _timerStartMs10;
   late String _timerStartMs11;
   late String _timerStartMs12;
+  // TIMER24 todo
   late String _timerStartMsAll;
 
   void useTimerToggle(int number, int index) {
@@ -132,6 +148,7 @@ class _SettingsModal extends State<SettingsModal> {
         case 12:
           this._useTimerIndex12 = index;
           break;
+        // TIMER24 todo
       }
     });
   }
@@ -151,6 +168,7 @@ class _SettingsModal extends State<SettingsModal> {
     useTimerToggle(10, index);
     useTimerToggle(11, index);
     useTimerToggle(12, index);
+    // TIMER24 todo
   }
 
   void timerUpDownToggle(int number, int index) {
@@ -193,6 +211,7 @@ class _SettingsModal extends State<SettingsModal> {
         case 12:
           this._timerUpDownIndex12 = index;
           break;
+        // TIMER24 todo
       }
     });
   }
@@ -212,6 +231,7 @@ class _SettingsModal extends State<SettingsModal> {
     timerUpDownToggle(10, index);
     timerUpDownToggle(11, index);
     timerUpDownToggle(12, index);
+    // TIMER24 todo
   }
 
   void timerStartChange(int number, String value) {
@@ -256,6 +276,7 @@ class _SettingsModal extends State<SettingsModal> {
         case 12:
           this._timerStartMs12 = value;
           break;
+        // TIMER24 todo
       }
     });
   }
@@ -300,6 +321,7 @@ class _SettingsModal extends State<SettingsModal> {
         case 12:
           this._timerSoundIndex12 = index;
           break;
+        // TIMER24 todo
       }
     });
   }
@@ -319,6 +341,7 @@ class _SettingsModal extends State<SettingsModal> {
     timerSoundToggle(10, index);
     timerSoundToggle(11, index);
     timerSoundToggle(12, index);
+    // TIMER24 todo
   }
 
   void startChangeAll(String text) {
@@ -336,6 +359,7 @@ class _SettingsModal extends State<SettingsModal> {
     timerStartChange(10, text);
     timerStartChange(11, text);
     timerStartChange(12, text);
+    // TIMER24 todo
   }
 
   void onHelp() async {
@@ -379,6 +403,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._useTimerIndex10 = (this.engine.timerSettings[9].enabled ? 1 : 0);
     this._useTimerIndex11 = (this.engine.timerSettings[10].enabled ? 1 : 0);
     this._useTimerIndex12 = (this.engine.timerSettings[11].enabled ? 1 : 0);
+    // TIMER24 todo
     this._useTimerIndexAll = (this.engine.useTimerAll ? 1 : 0);
 
     this._timerUpDownIndex1 = (this.engine.timerSettings[0].down ? 1 : 0);
@@ -393,6 +418,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._timerUpDownIndex10 = (this.engine.timerSettings[9].down ? 1 : 0);
     this._timerUpDownIndex11 = (this.engine.timerSettings[10].down ? 1 : 0);
     this._timerUpDownIndex12 = (this.engine.timerSettings[11].down ? 1 : 0);
+    // TIMER24 todo
     this._timerUpDownIndexAll = (this.engine.countDownAll ? 1 : 0);
 
     this._timerSoundIndex1 = (this.engine.timerSettings[0].sound ? 1 : 0);
@@ -407,6 +433,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._timerSoundIndex10 = (this.engine.timerSettings[9].sound ? 1 : 0);
     this._timerSoundIndex11 = (this.engine.timerSettings[10].sound ? 1 : 0);
     this._timerSoundIndex12 = (this.engine.timerSettings[11].sound ? 1 : 0);
+    // TIMER24 todo
     this._timerSoundIndexAll = (this.engine.soundAll ? 1 : 0);
 
     this._timerStartMs1 = this.engine.timerSettings[0].startMs.toString();
@@ -421,6 +448,7 @@ class _SettingsModal extends State<SettingsModal> {
     this._timerStartMs10 = this.engine.timerSettings[9].startMs.toString();
     this._timerStartMs11 = this.engine.timerSettings[10].startMs.toString();
     this._timerStartMs12 = this.engine.timerSettings[11].startMs.toString();
+    // TIMER24 todo
     this._timerStartMsAll = this.engine.startMsAll;
 
     return Scaffold(
@@ -537,6 +565,7 @@ class _SettingsModal extends State<SettingsModal> {
                 toggleFunction: (index) {
                   useTimerToggle(12, index);
                 }),
+            // TIMER24 todo
             new SizedBox(height: 10),
 
             new TimerEnableCard(
@@ -774,6 +803,7 @@ class _SettingsModal extends State<SettingsModal> {
                 timerSoundToggle(12, index);
               },
             ),
+            // TIMER24 todo
 
             Divider(
               height: 20.0,
