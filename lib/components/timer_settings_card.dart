@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:timers_tn/components/toggle_choice.dart';
 import 'package:timers_tn/constants.dart';
 
@@ -52,8 +53,9 @@ class TimerSettingsCard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
           child: new TextFormField(
+            keyboardType: TextInputType.number,
             decoration: new InputDecoration.collapsed(
-              hintText: 'milliseconds', // TODO format as minutes:seconds
+              hintText: 'milliseconds',
             ),
             autofocus: false,
             initialValue: this.startMsString,

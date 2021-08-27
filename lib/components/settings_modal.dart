@@ -559,8 +559,9 @@ class _SettingsModal extends State<SettingsModal> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20.0, 8.0, 8.0, 8.0),
               child: new TextFormField(
+                keyboardType: TextInputType.number,
                 decoration: new InputDecoration.collapsed(
-                  hintText: 'milliseconds, will change all when saved', // TODO format as minutes:seconds
+                  hintText: 'milliseconds, will change all when saved',
                 ),
                 autofocus: false,
                 initialValue: this._timerStartMsAll,

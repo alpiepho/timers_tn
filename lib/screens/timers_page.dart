@@ -223,12 +223,14 @@ class _TimersPageState extends State<TimersPage> {
   void _timerToggle(int number) {
     int index = number - 1;
     if (timers[index].isActive) {
+      stopwatches[index].stop();
       timers[index].cancel();
     }
     else {
       timers[index] = Timer.periodic(Duration(milliseconds: 10), (Timer timer) {
         _timerTick10ms(number);
       });
+      stopwatches[index].start();
     }
   }
 
@@ -283,18 +285,7 @@ class _TimersPageState extends State<TimersPage> {
         });
         break;
 
-      case KeyType.timer1:
-      case KeyType.timer2:
-      case KeyType.timer3:
-      case KeyType.timer4:
-      case KeyType.timer5:
-      case KeyType.timer6:
-      case KeyType.timer7:
-      case KeyType.timer8:
-      case KeyType.timer9:
-      case KeyType.timer10:
-      case KeyType.timer11:
-      case KeyType.timer12:
+      case KeyType.timer:
       var number = _engine.getTimerNumber(x, y);
         if (_resetNPending) {
           _resetNPending = false;
@@ -405,13 +396,10 @@ class _TimersPageState extends State<TimersPage> {
           style = style.copyWith(color: kLightColor);
         }
 
-        // TODO better way?
         if (_engine.getTimerNumber(i, j) > 0) {
           this._engine.timerSettings[_engine.getTimerNumber(i, j)-1].enabled = !disabled;
         }
 
-        var background = this._engine.grid[i][j].background;
-        var gradient = this._engine.grid[i][j].gradient;
         var flex = this._engine.grid[i][j].flex;
         // build onpress function that calls engine with closure
         var onPress = () {
@@ -438,10 +426,7 @@ class _TimersPageState extends State<TimersPage> {
             new Expanded(
               child: TimerButton(
                 onPress: onPress,
-                color: background,
                 margin: EdgeInsets.fromLTRB(0, 0, 2, 2),
-                portrait: true,
-                gradient: gradient,
                 disabled: disabled,
                 cardChild: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

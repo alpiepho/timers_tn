@@ -50,11 +50,12 @@ TBD
 - [done] TimerEnableCard
 - [done] TimerSettingCard
 - [done] rename calc_page
+- [done] fix individual timer pause/play (seems to be running behind the scene)
+- [skip] declarative layout timers for performance?
+- [skip] TimerButtonCard
+- [skip] Balance logic between timer page an engine
 
-- declarative layout timers for performance?
 - change toggle to checkbox
-- TimerButtonCard
-- Balance logic between timer page an engine
 - finish README
 - QR code
 - wrapup soon
