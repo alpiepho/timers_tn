@@ -48,18 +48,18 @@ class _SettingsModal extends State<SettingsModal> {
   late int _useTimerIndex11;
   late int _useTimerIndex12;
   // TIMER24
-  late int _useTimerIndex13;
-  late int _useTimerIndex14;
-  late int _useTimerIndex15;
-  late int _useTimerIndex16;
-  late int _useTimerIndex17;
-  late int _useTimerIndex18;
-  late int _useTimerIndex19;
-  late int _useTimerIndex20;
-  late int _useTimerIndex21;
-  late int _useTimerIndex22;
-  late int _useTimerIndex23;
-  late int _useTimerIndex24;
+  // late int _useTimerIndex13;
+  // late int _useTimerIndex14;
+  // late int _useTimerIndex15;
+  // late int _useTimerIndex16;
+  // late int _useTimerIndex17;
+  // late int _useTimerIndex18;
+  // late int _useTimerIndex19;
+  // late int _useTimerIndex20;
+  // late int _useTimerIndex21;
+  // late int _useTimerIndex22;
+  // late int _useTimerIndex23;
+  // late int _useTimerIndex24;
   late int _useTimerIndexAll;
 
   late int _timerUpDownIndex1;
