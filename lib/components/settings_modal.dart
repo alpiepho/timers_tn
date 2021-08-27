@@ -809,7 +809,7 @@ class _SettingsModal extends State<SettingsModal> {
               thickness: 2.0,
             ),
             new Text(
-              "UNDER CONSTRUCTION:",
+              "Help and Details:",
               textAlign: TextAlign.center,
             ),
             new SizedBox(height: 10),

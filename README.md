@@ -1,8 +1,11 @@
 ## Get Application
-Version: 0.1
+Version: 0.2
 
 GH-Pages site: https://alpiepho.github.io/timers_tn/
 
+or QR Code:
+
+![QR Code](./qr-code.png)
 ## timers_tn
 
 This application allows setting mutliple timers running independently. It is a PWA (prgressive web app), written in Flutter.
@@ -10,10 +13,38 @@ This application allows setting mutliple timers running independently. It is a P
 This was inspired by an AdaBox hardware project [timers](https://github.com/alpiepho/macropad/tree/master/timers_cp).
 
 ## Operation
-TBD
+To start, use the "?" to change the default settings for the multiple timers.  The first section allows for enable/disable of
+the various timers.  Just below that are controls to enable-all, set all as count-down timers, set finish-sound on for all,
+and set a starting time (currently in milliseconds rather than MM:SS) for all timers.
+
+Following those are sections for each timer. Use the back arrow in the top left to save any changes.
+
+On the main page, you may need to use ResetAll" to propogate the settings.  You can start all enabled timers with "PlayAll" and the
+pause all of them with "PauseAll".  Optionally, you can press the timer itself to play/pause.  Use "ResetN" then a press of any
+one timer to reset just that timer to the previous settings.
+
+Count down timers will change colors as they count down:
+- green: 100-70%
+- yellow: 40-70%
+- orange: 10=40%
+- red: 1-10%
+- red italics when done
+
+If avaiable and enabled, a boing sound will pay when timer is done.
+
+See below for any known bugs or limits.
 
 ## Learnings
-TBD
+
+Below are some things I learned with this project.
+
+- Started this as a curiousity if a fast Flutter app was possible
+- Took approx 10 days at 1-2 hours per day
+- Improved at refactoring long repeated functional sections inot components
+- Understand setState variables better
+- Understand timers, duration, and stopwatch now
+- Good refresher on favicons and QR codes
+- Need to understand on device (or simulation?) debug for things like sound not playing
 
 ## Ongoing Progress
 
@@ -54,17 +85,19 @@ TBD
 - [skip] declarative layout timers for performance?
 - [skip] TimerButtonCard
 - [skip] Balance logic between timer page an engine
+- [done] QR code
+- [done] finish README
 
-- change toggle to checkbox
-- finish README
-- QR code
 - wrapup soon
 - 24 timers? eliminate rows if not used?
 
-## Known Issues to Fix
+## Known Issues to Fix and TODO
 - timer setting is in ms
 - reset on init
 - sound does not work as PWA
 - record tone as sound instead of boing?
 - chose sounds?
 - change all startMs doesn't live change all settings
+- toggles slow, change to checkbox
+- settings for color percent
+
