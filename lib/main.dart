@@ -16,15 +16,15 @@ void main() {
   // Than we setup preferred orientations,
   // and only after it finished we run our app
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((value) => runApp(Calculator()));
+      .then((value) => runApp(Timers()));
 }
 
-class Calculator extends StatelessWidget {
+class Timers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Timers TN",
-      home: CalculatorPage(),
+      home: TimersPage(),
     );
   }
 }

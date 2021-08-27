@@ -9,12 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 import 'package:just_audio/just_audio.dart';
 
-class CalculatorPage extends StatefulWidget {
+class TimersPage extends StatefulWidget {
   @override
-  _CalculatorPageState createState() => _CalculatorPageState();
+  _TimersPageState createState() => _TimersPageState();
 }
 
-class _CalculatorPageState extends State<CalculatorPage> {
+class _TimersPageState extends State<TimersPage> {
 
   late AudioPlayer player;
 
