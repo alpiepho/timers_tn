@@ -46,16 +46,19 @@ TBD
 - [done] multiple timers not in sync
 - [done] timers are not accurate
 - [done] all buttons for down, sound
+- [done] set all startMs
+- [done] TimerEnableCard
+- [done] TimerSettingCard
 
+- rename calc_page
 - declarative layout timers for performance?
 - change toggle to checkbox
-- TimerEnableCard
-- TimerSettingCard
 - TimerButtonCard
 - Balance logic between timer page an engine
 - finish README
 - QR code
 - wrapup soon
+- 24 timers? eliminate rows if not used?
 
 ## Known Issues to Fix
 - timer setting is in ms
@@ -63,3 +66,4 @@ TBD
 - sound does not work as PWA
 - record tone as sound instead of boing?
 - chose sounds?
+- change all startMs doesn't live change all settings

@@ -106,7 +106,7 @@ class Engine {
   var useTimerAll = false;
   var countDownAll = false;
   var soundAll = false;
-  var startMsAll = 10000;
+  var startMsAll = "10000";
   var timerSettings = new List.generate(12, (index) => TimerSettings());
 
 
@@ -202,7 +202,7 @@ class Engine {
     useTimerAll = false;
     countDownAll = false;
     soundAll = false;
-    startMsAll = 10000;
+    startMsAll = "";
     adjustTimers();
   }
 
